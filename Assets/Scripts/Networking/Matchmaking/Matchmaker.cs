@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using Messages;
 
 namespace UnityEngine.Ucg.Matchmaking
 {
@@ -12,6 +13,7 @@ namespace UnityEngine.Ucg.Matchmaking
 
         MatchmakingController matchmakingController;
         private MatchmakingRequest request;
+        private Player player;
 
         public delegate void SuccessCallback(Assignment assignment);
         public delegate void ErrorCallback(string error);
@@ -54,11 +56,12 @@ namespace UnityEngine.Ucg.Matchmaking
         /// <param name="groupProps">Custom group properties relevant to the matchmaking function</param>
         public void RequestMatch(string playerId, MatchmakingPlayerProperties playerProps, MatchmakingGroupProperties groupProps)
         {
-            request = CreateMatchmakingRequest(playerId, playerProps, groupProps);
+            player = PlayerUtil.GeneratePlayer();
+            //request = CreateMatchmakingRequest(playerId, playerProps, groupProps);
 
             matchmakingController = new MatchmakingController(Endpoint);
 
-            matchmakingController.StartRequestMatch(request, GetAssignment, OnError);
+            matchmakingController.StartRequestMatch(player, GetAssignment, OnError);
             State = MatchmakingState.Requesting;
             Debug.Log(State);
         }
@@ -118,7 +121,7 @@ namespace UnityEngine.Ucg.Matchmaking
 
         void GetAssignment()
         {
-            matchmakingController.StartGetAssignment(request.Players[0].Id, OnSuccess, OnError);
+            matchmakingController.StartGetAssignment(player, OnSuccess, OnError);
             State = MatchmakingState.Searching;
             Debug.Log(State);
         }

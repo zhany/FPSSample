@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Ucg.Matchmaking.OpenMatch;
+using Messages;
 
 namespace UnityEngine.Ucg.Matchmaking
 {
@@ -17,6 +19,8 @@ namespace UnityEngine.Ucg.Matchmaking
         GetAssignmentError m_GetAssignmentError;
 
         MatchmakingClient m_Client;
+        OpenMatchClient openMatchClient;
+        Assignment assignment;
 
         UnityWebRequestAsyncOperation m_RequestMatchOperation;
 
@@ -25,16 +29,18 @@ namespace UnityEngine.Ucg.Matchmaking
         internal MatchmakingController(string endpoint)
         {
             m_Client = new MatchmakingClient(endpoint);
+            openMatchClient = new OpenMatchClient(endpoint);
         }
 
         /// <summary>
         /// Start a matchmaking request call on the controller
         /// </summary>
-        internal void StartRequestMatch(MatchmakingRequest request, RequestMatchSuccess successCallback, RequestMatchError errorCallback)
+        internal void StartRequestMatch(Player player, RequestMatchSuccess successCallback, RequestMatchError errorCallback)
         {
-            m_RequestMatchOperation = m_Client.RequestMatchAsync(request);
+            //m_RequestMatchOperation = m_Client.RequestMatchAsync(request);
             m_RequestMatchSuccess = successCallback;
             m_RequestMatchError = errorCallback;
+            openMatchClient.CreatePlayer(player);
         }
 
         /// <summary>
@@ -42,29 +48,29 @@ namespace UnityEngine.Ucg.Matchmaking
         /// </summary>
         internal void UpdateRequestMatch()
         {
-            if (m_RequestMatchOperation == null)
-            {
-                Debug.Log("You must call StartRequestMatch first");
-                return;
-            }
-            else if (!m_RequestMatchOperation.isDone)
-            {
-                return;
-            }
+            //if (m_RequestMatchOperation == null)
+            //{
+            //    Debug.Log("You must call StartRequestMatch first");
+            //    return;
+            //}
+            //else if (!m_RequestMatchOperation.isDone)
+            //{
+            //    return;
+            //}
             
-            if (m_RequestMatchOperation.webRequest.isNetworkError || m_RequestMatchOperation.webRequest.isHttpError)
-            {
-                Debug.LogError("There was an error calling matchmaking RequestMatch. Error: " + m_RequestMatchOperation.webRequest.error);
-                m_RequestMatchError.Invoke(m_RequestMatchOperation.webRequest.error);
-                return;
-            }
+            //if (m_RequestMatchOperation.webRequest.isNetworkError || m_RequestMatchOperation.webRequest.isHttpError)
+            //{
+            //    Debug.LogError("There was an error calling matchmaking RequestMatch. Error: " + m_RequestMatchOperation.webRequest.error);
+            //    m_RequestMatchError.Invoke(m_RequestMatchOperation.webRequest.error);
+            //    return;
+            //}
 
-            MatchmakingResult result = JsonUtility.FromJson<MatchmakingResult>(m_RequestMatchOperation.webRequest.downloadHandler.text);
-            if (!result.success)
-            {
-                m_RequestMatchError.Invoke(result.error);
-                return;
-            }
+            //MatchmakingResult result = JsonUtility.FromJson<MatchmakingResult>(m_RequestMatchOperation.webRequest.downloadHandler.text);
+            //if (!result.success)
+            //{
+            //    m_RequestMatchError.Invoke(result.error);
+            //    return;
+            //}
 
             m_RequestMatchSuccess.Invoke();
         }
@@ -72,11 +78,12 @@ namespace UnityEngine.Ucg.Matchmaking
         /// <summary>
         /// Start a matchmaking request to get the provided player's assigned connection information
         /// </summary>
-        internal void StartGetAssignment(string id, GetAssignmentSuccess successCallback, GetAssignmentError errorCallback)
+        internal void StartGetAssignment(Player player, GetAssignmentSuccess successCallback, GetAssignmentError errorCallback)
         {
-            m_GetAssignmentOperation = m_Client.GetAssignmentAsync(id);
+            //m_GetAssignmentOperation = m_Client.GetAssignmentAsync(id);
             m_GetAssignmentSuccess = successCallback;
             m_GetAssignmentError = errorCallback;
+            openMatchClient.GetUpdates(player);
         }
 
         /// <summary>
@@ -84,32 +91,47 @@ namespace UnityEngine.Ucg.Matchmaking
         /// </summary>
         internal void UpdateGetAssignment()
         {
-            if (m_GetAssignmentOperation == null)
-            {
-                Debug.Log("You must call StartGetAssignment first");
-                return;
-            }
-            else if (!m_GetAssignmentOperation.isDone)
+            if (openMatchClient == null)
             {
                 return;
             }
-
-            if (m_GetAssignmentOperation.webRequest.isNetworkError || m_GetAssignmentOperation.webRequest.isHttpError)
+            Assignment assignment = openMatchClient.Assignment;
+            if (assignment == null)
             {
-                Debug.LogError("There was an error calling matchmaking getAssignment. Error: " + m_GetAssignmentOperation.webRequest.error);
-                m_GetAssignmentError.Invoke(m_GetAssignmentOperation.webRequest.error);
                 return;
             }
 
-            Assignment result = JsonUtility.FromJson<Assignment>(m_GetAssignmentOperation.webRequest.downloadHandler.text);
-
-            if (!string.IsNullOrEmpty(result.AssignmentError))
+            if (string.IsNullOrEmpty(assignment.ConnectionString))
             {
-                m_GetAssignmentError.Invoke(result.AssignmentError);
                 return;
             }
+            m_GetAssignmentSuccess.Invoke(assignment);
+            //if (m_GetAssignmentOperation == null)
+            //{
+            //    Debug.Log("You must call StartGetAssignment first");
+            //    return;
+            //}
+            //else if (!m_GetAssignmentOperation.isDone)
+            //{
+            //    return;
+            //}
 
-            m_GetAssignmentSuccess.Invoke(result);
+            //if (m_GetAssignmentOperation.webRequest.isNetworkError || m_GetAssignmentOperation.webRequest.isHttpError)
+            //{
+            //    Debug.LogError("There was an error calling matchmaking getAssignment. Error: " + m_GetAssignmentOperation.webRequest.error);
+            //    m_GetAssignmentError.Invoke(m_GetAssignmentOperation.webRequest.error);
+            //    return;
+            //}
+
+            //Assignment result = JsonUtility.FromJson<Assignment>(m_GetAssignmentOperation.webRequest.downloadHandler.text);
+
+            //if (!string.IsNullOrEmpty(result.AssignmentError))
+            //{
+            //    m_GetAssignmentError.Invoke(result.AssignmentError);
+            //    return;
+            //}
+
+            //m_GetAssignmentSuccess.Invoke(result);
 
         }
     }

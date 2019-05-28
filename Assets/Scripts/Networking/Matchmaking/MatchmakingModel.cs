@@ -97,7 +97,11 @@ namespace UnityEngine.Ucg.Matchmaking
         List<string> roster;
 #pragma warning restore 649
 
-        public string ConnectionString => connection_string;
+        public string ConnectionString
+        {
+            get { return connection_string; }
+            set { connection_string = value; }
+        }
         public string AssignmentError => assignment_error;
         public List<string> Roster
         {
