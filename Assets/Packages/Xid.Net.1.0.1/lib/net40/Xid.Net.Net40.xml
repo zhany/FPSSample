@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Xid.Net.Net40</name>
+    </assembly>
+    <members>
+        <member name="T:XidNet.ErrorMessages">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:XidNet.ErrorMessages.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:XidNet.ErrorMessages.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:XidNet.ErrorMessages.UnexpectedEndOfStream">
+            <summary>
+              Looks up a localized string similar to Unexpected end of stream.
+            </summary>
+        </member>
+        <member name="P:XidNet.ErrorMessages.XidByteArgLength">
+            <summary>
+              Looks up a localized string similar to Length must be {0} bytes.
+            </summary>
+        </member>
+        <member name="P:XidNet.ErrorMessages.XidInsufficientBytes">
+            <summary>
+              Looks up a localized string similar to Insufficient bytes to construct xid.
+            </summary>
+        </member>
+        <member name="P:XidNet.ErrorMessages.XidOffsetTooLarge">
+            <summary>
+              Looks up a localized string similar to Insufficient byte for Xid starting at specified offset..
+            </summary>
+        </member>
+        <member name="P:XidNet.ErrorMessages.XidStringArgLength">
+            <summary>
+              Looks up a localized string similar to An encoded Xid must have length of {0}.
+            </summary>
+        </member>
+        <member name="T:XidNet.Xid">
+            <summary>
+            Represents a statistcally unique value, similar to a <see cref="T:System.Guid"/> but only 15 bytes in it's raw form and 20 bytes when encoded as a string.
+            </summary>
+            <remarks>
+            <para>Xid is using Mongo Object ID algorithm to generate globally unique ids with a different serialization (base64) to make it shorter when transported as a string: https://docs.mongodb.org/manual/reference/object-id/</para>
+            <list type="Bullet">
+            <item>4-byte value representing the seconds since the Unix epoch.</item>
+            <item>3-byte machine identifier.</item>
+            <item>2-byte process id.</item>
+            <item>3-byte counter, starting with a random value.</item>
+            </list>
+            <para>
+            The binary representation of the id is compatible with Mongo 12 bytes Object IDs. The string representation is using base32 hex (w/o padding) for better space efficiency when stored in that form (20 bytes). The hex variant of base32 is used to retain the sortable property of the id.
+            </para>
+            <para>
+            Xid doesn't use base64 because case sensitivity and the 2 non alphanum chars may be an issue when transported as a string between various systems. Base36 wasn't retained either because 1/ it's not standard 2/ the resulting size is not predictable (not bit aligned) and 3/ it would not remain sortable. To validate a base32 xid, expect a 20 chars long, all lowercase sequence of a to v letters and 0 to 9 numbers ([0-9a-v]{20}).
+            </para>
+            <para>
+            No configuration or central generator server is required so it can be used directly in server's code.
+            </para>
+            <para>Xid's are also k-sortable.</para>
+            <para>Unicity guaranteed for 16,777,216 (24 bits) unique ids per second and per host/process.</para>
+            <para>Lock-free (i.e.: unlike UUIDv1 and v2).</para>
+            </remarks>
+        </member>
+        <member name="F:XidNet.Xid.EncodedLength">
+            <summary>
+            The length of a Xid when converted to a string.
+            </summary>
+        </member>
+        <member name="F:XidNet.Xid.Length">
+            <summary>
+            The length of a Xid as raw bytes.
+            </summary>
+        </member>
+        <member name="F:XidNet.Xid.Empty">
+            <summary>
+            An empty Xid, the defaut value for a new Xid using the default constructor.
+            </summary>
+        </member>
+        <member name="M:XidNet.Xid.NewXid">
+            <summary>
+            Creates a new <see cref="T:XidNet.Xid"/> value.
+            </summary>
+            <remarks>
+            <para>This method is thread-safe in that it can be called from multiple threads simulataneously and each call will return a valid <see cref="T:XidNet.Xid"/> and not corrupt any internal state.</para>
+            </remarks>
+            <returns>A new <see cref="T:XidNet.Xid"/> value.</returns>
+        </member>
+        <member name="M:XidNet.Xid.Parse(System.String)">
+            <summary>
+            Parses a string into a <see cref="T:XidNet.Xid"/>, throws an exception if parse fails.
+            </summary>
+            <remarks>Assumes the string is a base 32 encoded Xid.</remarks>
+            <param name="encodedXid">The string to be parsed.</param>
+            <returns>A new <see cref="T:XidNet.Xid"/> from the parsed string.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="encodedXid"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if <paramref name="encodedXid"/> is not the correct length (<see cref="F:XidNet.Xid.EncodedLength"/>) for a Xid, or if the Xid cannot be parsed for any other reason (such as containing invalid characters).</exception>
+        </member>
+        <member name="M:XidNet.Xid.TryParse(System.String,XidNet.Xid@)">
+            <summary>
+            Attempts to parse a string into a <see cref="T:XidNet.Xid"/>. 
+            </summary>
+            <remarks>Assumes the string is a base 32 encoded Xid.</remarks>
+            <param name="encodedXid">The string to be parsed.</param>
+            <param name="xid">A <see cref="T:XidNet.Xid"/> if the parse is successful.</param>
+            <returns>True if the string was successfully parsed, otherwise false.</returns>
+        </member>
+        <member name="M:XidNet.Xid.#ctor(System.Byte[])">
+            <summary>
+            Constructs a new <see cref="T:XidNet.Xid"/> using the specified bytes.
+            </summary>
+            <param name="rawValues">A byte array containing the values to reconstruct a <see cref="T:XidNet.Xid"/> from.</param>
+            <seealso cref="M:XidNet.Xid.ToBytes"/>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="rawValues"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the length of <paramref name="rawValues"/> is less than the number of bytes for a Xid.</exception>
+        </member>
+        <member name="M:XidNet.Xid.#ctor(System.Byte[],System.Int32)">
+            <summary>
+            Constructs a new <see cref="T:XidNet.Xid"/> using the specified bytes.
+            </summary>
+            <param name="rawValues">A byte array containing the values to reconstruct a <see cref="T:XidNet.Xid"/> from.</param>
+            <param name="offset">The offset to start reading from in <paramref name="rawValues"/> when creating the <see cref="T:XidNet.Xid"/>.</param>
+            <seealso cref="M:XidNet.Xid.ToBytes"/>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="rawValues"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the length of <paramref name="rawValues"/> less the <paramref name="offset"/> is less than the number of bytes for a Xid.</exception>
+        </member>
+        <member name="M:XidNet.Xid.#ctor(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Constructs a new <see cref="T:XidNet.Xid"/> using the specified bytes.
+            </summary>
+            <param name="b1">The first byte of the timestamp.</param>
+            <param name="b2">The second byte of the timestamp.</param>
+            <param name="b3">The third byte of the timestamp.</param>
+            <param name="b4">The fourth byte of the timestamp.</param>
+            <param name="b5">The first byte of the machine id.</param>
+            <param name="b6">The second byte of the machine id.</param>
+            <param name="b7">The third byte of the machine id.</param>
+            <param name="b8">The first byte of the pid.</param>
+            <param name="b9">The second byte of the pid.</param>
+            <param name="b10">The first byte of the counter value.</param>
+            <param name="b11">The second byte of the counter value.</param>
+            <param name="b12">The third byte of the counter value.</param>
+            <seealso cref="M:XidNet.Xid.ToBytes"/>
+        </member>
+        <member name="M:XidNet.Xid.ToString">
+            <summary>
+            Encodes the value of this <see cref="T:XidNet.Xid"/> as a base 32 string.
+            </summary>
+            <returns>A string containing the base 32 encoded value of this <see cref="T:XidNet.Xid"/>.</returns>
+        </member>
+        <member name="M:XidNet.Xid.ToBytes">
+            <summary>
+            Returns a new byte array containing the individual bytes that make up this <see cref="T:XidNet.Xid"/> value.
+            </summary>
+            <returns>A new byte array containing the raw values of this xid.</returns>
+        </member>
+        <member name="M:XidNet.Xid.ToBytes(System.Byte[])">
+            <summary>
+            Fills the provided byte array with the values of this xid.
+            </summary>
+            <param name="buffer">The byte array to fill.</param>
+        </member>
+        <member name="M:XidNet.Xid.ToBytes(System.Byte[],System.Int32)">
+            <summary>
+            Writes the raw byte values for this Xid to the provided byte array starting at the specified offset.
+            </summary>
+            <param name="buffer">The byte array to fill.</param>
+            <param name="offset">The first index in <paramref name="buffer"/> at which to start writing the <see cref="T:XidNet.Xid"/> values.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="buffer"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the length of the buffer less the offset is less <see cref="F:XidNet.Xid.Length"/> of a Xid, or if the offset plus the length of a Xid would overflow an integer value.</exception>
+        </member>
+        <member name="M:XidNet.Xid.GetTimestamp">
+            <summary>
+            Returns the time stamp portion of this Xid as a <see cref="T:System.DateTime"/> value.
+            </summary>
+            <returns>A <see cref="T:System.DateTime"/> instance representing the creation date &amp; time of the Xid with second accuracy.</returns>
+        </member>
+        <member name="M:XidNet.Xid.GetMachineId">
+            <summary>
+            Returns the 3 byte identifier of the machine that generated this Xid, as a byte array.
+            </summary>
+            <returns>A byte array containing the machine identifier.</returns>
+        </member>
+        <member name="M:XidNet.Xid.GetProcessId">
+            <summary>
+            Returns the 2 byte process id of this Xid as a <see cref="T:System.UInt16"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XidNet.Xid.GetCounter">
+            <summary>
+            Returns the 3-byte sequential value portion of this Xid.
+            </summary>
+            <returns>An integer containing the value of the counter used to generate this Xid.</returns>
+        </member>
+        <member name="M:XidNet.Xid.ToString(System.String,System.IFormatProvider)">
+            <summary>
+            Encodes this <see cref="T:XidNet.Xid"/> as a base 32 string.
+            </summary>
+            <param name="format">Not currently used.</param>
+            <param name="formatProvider">Not currently used.</param>
+            <returns>Return a string containing a base 32 representation of the value of this <see cref="T:XidNet.Xid"/>.</returns>
+        </member>
+        <member name="M:XidNet.Xid.Equals(XidNet.Xid)">
+            <summary>
+            Compares this <see cref="T:XidNet.Xid"/> to <paramref name="other"/> and returns true if they represent the same value.
+            </summary>
+            <param name="other">Another <see cref="T:XidNet.Xid"/> to compare to.</param>
+            <returns>True if the <see cref="T:XidNet.Xid"/>s represent the same value, otherwise false.</returns>
+        </member>
+        <member name="M:XidNet.Xid.Equals(System.Object)">
+            <summary>
+            Returns true if <paramref name="obj"/> is a <see cref="T:XidNet.Xid"/> that has the same value as this instance.
+            </summary>
+            <param name="obj">A value to check equality with.</param>
+            <returns>True if <paramref name="obj"/> is an equal Xid value.</returns>
+        </member>
+        <member name="M:XidNet.Xid.GetHashCode">
+            <summary>
+            Returns the hashcode for this instance.
+            </summary>
+            <returns>An integer value containing the hashcode for this instance.</returns>
+        </member>
+        <member name="M:XidNet.Xid.CompareTo(System.Object)">
+            <summary>
+            Compares the current instance with another object of the same type and returns
+            an integer that indicates whether the current instance precedes, follows, or
+            occurs in the same position in the sort order as the other object.
+            </summary>
+            <param name="obj">An object to compare with this instance.</param>
+            <returns>
+            A value that indicates the relative order of the objects being compared. The
+            return value has these meanings: Value Meaning Less than zero This instance precedes
+            obj in the sort order. Zero This instance occurs in the same position in the
+            sort order as obj. Greater than zero This instance follows obj in the sort order.		
+            </returns>
+        </member>
+        <member name="M:XidNet.Xid.CompareTo(XidNet.Xid)">
+            <summary>
+            Compares the current instance with another value of the same type and returns
+            an integer that indicates whether the current instance precedes, follows, or
+            occurs in the same position in the sort order as the other object.
+            </summary>
+            <param name="other">An <see cref="T:XidNet.Xid"/> to compare with this instance.</param>
+            <returns>
+            A value that indicates the relative order of the objects being compared. The
+            return value has these meanings: Value Meaning Less than zero This instance precedes
+            obj in the sort order. Zero This instance occurs in the same position in the
+            sort order as obj. Greater than zero This instance follows obj in the sort order.		
+            </returns>
+        </member>
+        <member name="M:XidNet.Xid.op_Equality(XidNet.Xid,XidNet.Xid)">
+            <summary>
+            Overloads the == operator to provide value based equality.
+            </summary>
+            <param name="a">A <see cref="T:XidNet.Xid"/> to equality check.</param>
+            <param name="b">A <see cref="T:XidNet.Xid"/> to equality check.</param>
+            <returns>True if <paramref name="a"/> and <paramref name="b"/> represent the same value.</returns>
+        </member>
+        <member name="M:XidNet.Xid.op_Inequality(XidNet.Xid,XidNet.Xid)">
+            <summary>
+            Overloads the != operator to provide value based inequality.
+            </summary>
+            <param name="a">A <see cref="T:XidNet.Xid"/> to inequality check.</param>
+            <param name="b">A <see cref="T:XidNet.Xid"/> to inequality check.</param>
+            <returns>True if <paramref name="a"/> and <paramref name="b"/> do not represent the same value.</returns>
+        </member>
+        <member name="M:XidNet.Xid.op_GreaterThan(XidNet.Xid,XidNet.Xid)">
+            <summary>
+            Peforms a greater than comparison of <paramref name="a"/> and <paramref name="b"/>.
+            </summary>
+            <param name="a">A <see cref="T:XidNet.Xid"/> to compare.</param>
+            <param name="b">A <see cref="T:XidNet.Xid"/> to compare.</param>
+            <returns>True if <paramref name="a"/> is greater than <paramref name="b"/>.</returns>
+        </member>
+        <member name="M:XidNet.Xid.op_GreaterThanOrEqual(XidNet.Xid,XidNet.Xid)">
+            <summary>
+            Peforms a greater than or equal to comparison of <paramref name="a"/> and <paramref name="b"/>.
+            </summary>
+            <param name="a">A <see cref="T:XidNet.Xid"/> to compare.</param>
+            <param name="b">A <see cref="T:XidNet.Xid"/> to compare.</param>
+            <returns>True if <paramref name="a"/> is greater than or equal to <paramref name="b"/>.</returns>
+        </member>
+        <member name="M:XidNet.Xid.op_LessThan(XidNet.Xid,XidNet.Xid)">
+            <summary>
+            Peforms a less than comparison of <paramref name="a"/> and <paramref name="b"/>.
+            </summary>
+            <param name="a">A <see cref="T:XidNet.Xid"/> to compare.</param>
+            <param name="b">A <see cref="T:XidNet.Xid"/> to compare.</param>
+            <returns>True if <paramref name="a"/> is less than <paramref name="b"/>.</returns>
+        </member>
+        <member name="M:XidNet.Xid.op_LessThanOrEqual(XidNet.Xid,XidNet.Xid)">
+            <summary>
+            Peforms a less than or equal to comparison of <paramref name="a"/> and <paramref name="b"/>.
+            </summary>
+            <param name="a">A <see cref="T:XidNet.Xid"/> to compare.</param>
+            <param name="b">A <see cref="T:XidNet.Xid"/> to compare.</param>
+            <returns>True if <paramref name="a"/> is less than or equal to <paramref name="b"/>.</returns>
+        </member>
+        <member name="T:XidNet.XidStreamExtensions">
+            <summary>
+            Provides extensions to <see cref="T:System.IO.Stream"/> for reading and write <see cref="T:XidNet.Xid"/>s.
+            </summary>
+        </member>
+        <member name="M:XidNet.XidStreamExtensions.WriteXid(System.IO.Stream,XidNet.Xid)">
+            <summary>
+            Writes a <see cref="T:XidNet.Xid"/> to a <see cref="T:System.IO.Stream"/> instance without creating an intermediate buffer.
+            </summary>
+            <param name="stream">The stream to write to.</param>
+            <param name="xid">A <see cref="T:XidNet.Xid"/> instance to write the raw bytes of.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="stream"/> is null.</exception>
+        </member>
+        <member name="M:XidNet.XidStreamExtensions.ReadXid(System.IO.Stream)">
+            <summary>
+            Reads the next 12 bytes from a stream and creates a new <see cref="T:XidNet.Xid"/> instance from them, without creating an intermediate buffer.
+            </summary>
+            <param name="stream">The stream to read from.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="stream"/> is null.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown if there are less than 12 bytes left in the stream. In this case the stream position will have been advanced to the last byte available before the exception is thrown.</exception>
+            <returns>Returns a <see cref="T:XidNet.Xid"/> instance built by reading the next 12 bytes from the <paramref name="stream"/> provided.</returns>
+        </member>
+    </members>
+</doc>
