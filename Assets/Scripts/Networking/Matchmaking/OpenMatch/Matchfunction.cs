@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Api {
+namespace OpenMatch {
 
   /// <summary>Holder for reflection information generated from matchfunction.proto</summary>
   public static partial class MatchfunctionReflection {
@@ -24,28 +24,25 @@ namespace Api {
     static MatchfunctionReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChNtYXRjaGZ1bmN0aW9uLnByb3RvEgNhcGkaDm1lc3NhZ2VzLnByb3RvGhxn",
-            "b29nbGUvYXBpL2Fubm90YXRpb25zLnByb3RvIogBCgpSdW5SZXF1ZXN0EhIK",
-            "CnByb2ZpbGVfaWQYASABKAkSEwoLcHJvcG9zYWxfaWQYAiABKAkSEQoJcmVz",
-            "dWx0X2lkGAMgASgJEisKDG1hdGNoX29iamVjdBgEIAEoCzIVLm1lc3NhZ2Vz",
-            "Lk1hdGNoT2JqZWN0EhEKCXRpbWVzdGFtcBgFIAEoCSINCgtSdW5SZXNwb25z",
-            "ZTJSCg1NYXRjaEZ1bmN0aW9uEkEKA1J1bhIPLmFwaS5SdW5SZXF1ZXN0GhAu",
-            "YXBpLlJ1blJlc3BvbnNlIheC0+STAhEaDC92MS9mdW5jdGlvbjoBKkINWgtp",
-            "bnRlcm5hbC9wYmIGcHJvdG8z"));
+            "ChNtYXRjaGZ1bmN0aW9uLnByb3RvEglvcGVubWF0Y2gaDm1lc3NhZ2VzLnBy",
+            "b3RvGhxnb29nbGUvYXBpL2Fubm90YXRpb25zLnByb3RvIjYKClJ1blJlcXVl",
+            "c3QSKAoHcHJvZmlsZRgBIAEoCzIXLm9wZW5tYXRjaC5NYXRjaFByb2ZpbGUi",
+            "MQoLUnVuUmVzcG9uc2USIgoIcHJvcG9zYWwYASABKAsyEC5vcGVubWF0Y2gu",
+            "TWF0Y2gyaQoNTWF0Y2hGdW5jdGlvbhJYCgNSdW4SFS5vcGVubWF0Y2guUnVu",
+            "UmVxdWVzdBoWLm9wZW5tYXRjaC5SdW5SZXNwb25zZSIggtPkkwIaIhUvdjEv",
+            "bWF0Y2hmdW5jdGlvbjpydW46ASowAUIuWiBvcGVuLW1hdGNoLmRldi9vcGVu",
+            "LW1hdGNoL3BrZy9wYqoCCU9wZW5NYXRjaGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Messages.MessagesReflection.Descriptor, global::Google.Api.AnnotationsReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::OpenMatch.MessagesReflection.Descriptor, global::Google.Api.AnnotationsReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Api.RunRequest), global::Api.RunRequest.Parser, new[]{ "ProfileId", "ProposalId", "ResultId", "MatchObject", "Timestamp" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Api.RunResponse), global::Api.RunResponse.Parser, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::OpenMatch.RunRequest), global::OpenMatch.RunRequest.Parser, new[]{ "Profile" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::OpenMatch.RunResponse), global::OpenMatch.RunResponse.Parser, new[]{ "Proposal" }, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  /// <summary>
-  /// Request message sent to the MMF.
-  /// </summary>
   public sealed partial class RunRequest : pb::IMessage<RunRequest> {
     private static readonly pb::MessageParser<RunRequest> _parser = new pb::MessageParser<RunRequest>(() => new RunRequest());
     private pb::UnknownFieldSet _unknownFields;
@@ -54,7 +51,7 @@ namespace Api {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Api.MatchfunctionReflection.Descriptor.MessageTypes[0]; }
+      get { return global::OpenMatch.MatchfunctionReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -71,11 +68,7 @@ namespace Api {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public RunRequest(RunRequest other) : this() {
-      profileId_ = other.profileId_;
-      proposalId_ = other.proposalId_;
-      resultId_ = other.resultId_;
-      matchObject_ = other.matchObject_ != null ? other.matchObject_.Clone() : null;
-      timestamp_ = other.timestamp_;
+      profile_ = other.profile_ != null ? other.profile_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -84,70 +77,18 @@ namespace Api {
       return new RunRequest(this);
     }
 
-    /// <summary>Field number for the "profile_id" field.</summary>
-    public const int ProfileIdFieldNumber = 1;
-    private string profileId_ = "";
+    /// <summary>Field number for the "profile" field.</summary>
+    public const int ProfileFieldNumber = 1;
+    private global::OpenMatch.MatchProfile profile_;
     /// <summary>
-    /// Developer-chosen profile name, state storage key for the match object.
+    /// The MatchProfile that describes the Match that this MatchFunction needs to
+    /// generate proposals for.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string ProfileId {
-      get { return profileId_; }
+    public global::OpenMatch.MatchProfile Profile {
+      get { return profile_; }
       set {
-        profileId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "proposal_id" field.</summary>
-    public const int ProposalIdFieldNumber = 2;
-    private string proposalId_ = "";
-    /// <summary>
-    /// The ID against which, the generated proposal should be stored.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string ProposalId {
-      get { return proposalId_; }
-      set {
-        proposalId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "result_id" field.</summary>
-    public const int ResultIdFieldNumber = 3;
-    private string resultId_ = "";
-    /// <summary>
-    /// Final result ID. MMF needs to know this in case of errors where proposal generation can be shortcircuited.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string ResultId {
-      get { return resultId_; }
-      set {
-        resultId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "match_object" field.</summary>
-    public const int MatchObjectFieldNumber = 4;
-    private global::Messages.MatchObject matchObject_;
-    /// <summary>
-    /// The match object containing the details of the match to be generated.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Messages.MatchObject MatchObject {
-      get { return matchObject_; }
-      set {
-        matchObject_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "timestamp" field.</summary>
-    public const int TimestampFieldNumber = 5;
-    private string timestamp_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Timestamp {
-      get { return timestamp_; }
-      set {
-        timestamp_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        profile_ = value;
       }
     }
 
@@ -164,22 +105,14 @@ namespace Api {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (ProfileId != other.ProfileId) return false;
-      if (ProposalId != other.ProposalId) return false;
-      if (ResultId != other.ResultId) return false;
-      if (!object.Equals(MatchObject, other.MatchObject)) return false;
-      if (Timestamp != other.Timestamp) return false;
+      if (!object.Equals(Profile, other.Profile)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (ProfileId.Length != 0) hash ^= ProfileId.GetHashCode();
-      if (ProposalId.Length != 0) hash ^= ProposalId.GetHashCode();
-      if (ResultId.Length != 0) hash ^= ResultId.GetHashCode();
-      if (matchObject_ != null) hash ^= MatchObject.GetHashCode();
-      if (Timestamp.Length != 0) hash ^= Timestamp.GetHashCode();
+      if (profile_ != null) hash ^= Profile.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -193,25 +126,9 @@ namespace Api {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (ProfileId.Length != 0) {
+      if (profile_ != null) {
         output.WriteRawTag(10);
-        output.WriteString(ProfileId);
-      }
-      if (ProposalId.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(ProposalId);
-      }
-      if (ResultId.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(ResultId);
-      }
-      if (matchObject_ != null) {
-        output.WriteRawTag(34);
-        output.WriteMessage(MatchObject);
-      }
-      if (Timestamp.Length != 0) {
-        output.WriteRawTag(42);
-        output.WriteString(Timestamp);
+        output.WriteMessage(Profile);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -221,20 +138,8 @@ namespace Api {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (ProfileId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ProfileId);
-      }
-      if (ProposalId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ProposalId);
-      }
-      if (ResultId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ResultId);
-      }
-      if (matchObject_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(MatchObject);
-      }
-      if (Timestamp.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Timestamp);
+      if (profile_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Profile);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -247,23 +152,11 @@ namespace Api {
       if (other == null) {
         return;
       }
-      if (other.ProfileId.Length != 0) {
-        ProfileId = other.ProfileId;
-      }
-      if (other.ProposalId.Length != 0) {
-        ProposalId = other.ProposalId;
-      }
-      if (other.ResultId.Length != 0) {
-        ResultId = other.ResultId;
-      }
-      if (other.matchObject_ != null) {
-        if (matchObject_ == null) {
-          matchObject_ = new global::Messages.MatchObject();
+      if (other.profile_ != null) {
+        if (profile_ == null) {
+          Profile = new global::OpenMatch.MatchProfile();
         }
-        MatchObject.MergeFrom(other.MatchObject);
-      }
-      if (other.Timestamp.Length != 0) {
-        Timestamp = other.Timestamp;
+        Profile.MergeFrom(other.Profile);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -277,26 +170,10 @@ namespace Api {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            ProfileId = input.ReadString();
-            break;
-          }
-          case 18: {
-            ProposalId = input.ReadString();
-            break;
-          }
-          case 26: {
-            ResultId = input.ReadString();
-            break;
-          }
-          case 34: {
-            if (matchObject_ == null) {
-              matchObject_ = new global::Messages.MatchObject();
+            if (profile_ == null) {
+              Profile = new global::OpenMatch.MatchProfile();
             }
-            input.ReadMessage(matchObject_);
-            break;
-          }
-          case 42: {
-            Timestamp = input.ReadString();
+            input.ReadMessage(Profile);
             break;
           }
         }
@@ -313,7 +190,7 @@ namespace Api {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Api.MatchfunctionReflection.Descriptor.MessageTypes[1]; }
+      get { return global::OpenMatch.MatchfunctionReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -330,12 +207,28 @@ namespace Api {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public RunResponse(RunResponse other) : this() {
+      proposal_ = other.proposal_ != null ? other.proposal_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public RunResponse Clone() {
       return new RunResponse(this);
+    }
+
+    /// <summary>Field number for the "proposal" field.</summary>
+    public const int ProposalFieldNumber = 1;
+    private global::OpenMatch.Match proposal_;
+    /// <summary>
+    /// The proposal generated by this MatchFunction Run.
+    /// Note that OpenMatch will validate the proposals, a valid match should contain at least one ticket.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::OpenMatch.Match Proposal {
+      get { return proposal_; }
+      set {
+        proposal_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -351,12 +244,14 @@ namespace Api {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (!object.Equals(Proposal, other.Proposal)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (proposal_ != null) hash ^= Proposal.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -370,6 +265,10 @@ namespace Api {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (proposal_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Proposal);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -378,6 +277,9 @@ namespace Api {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (proposal_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Proposal);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -388,6 +290,12 @@ namespace Api {
     public void MergeFrom(RunResponse other) {
       if (other == null) {
         return;
+      }
+      if (other.proposal_ != null) {
+        if (proposal_ == null) {
+          Proposal = new global::OpenMatch.Match();
+        }
+        Proposal.MergeFrom(other.Proposal);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -400,6 +308,13 @@ namespace Api {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 10: {
+            if (proposal_ == null) {
+              Proposal = new global::OpenMatch.Match();
+            }
+            input.ReadMessage(Proposal);
+            break;
+          }
         }
       }
     }

@@ -514,7 +514,7 @@ public class ClientGameLoop : Game.IGameLoop, INetworkCallbacks, INetworkClientC
     [ConfigVar(Name ="client.playername", DefaultValue = "Noname", Description = "Name of player", Flags = ConfigVar.Flags.ClientInfo | ConfigVar.Flags.Save)]
     public static ConfigVar clientPlayerName;
 
-    [ConfigVar(Name = "client.matchmaker", DefaultValue = "10.86.32.205:30894", Description = "Address of matchmaker", Flags = ConfigVar.Flags.None)]
+    [ConfigVar(Name = "client.matchmaker", DefaultValue = "0.0.0.0:80", Description = "Address of matchmaker", Flags = ConfigVar.Flags.None)]
     public static ConfigVar clientMatchmaker;
 
     public bool Init(string[] args)
@@ -975,7 +975,6 @@ public class ClientGameLoop : Game.IGameLoop, INetworkCallbacks, INetworkClientC
     /// </summary>
     void CmdMatchmake(string[] args)
     {
-        GameDebug.Log("Start matchmaking");
         if (m_matchmaker != null)
         {
             GameDebug.Log("matchmake: Already in a matchmaking session. Wait for completion before matchmaking again.");

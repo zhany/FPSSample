@@ -432,7 +432,6 @@ public class Game : MonoBehaviour
         Console.AddCommand("thinclient", CmdThinClient, "client: Enter thin client mode.");
         Console.AddCommand("boot", CmdBoot, "Go back to boot loop");
         Console.AddCommand("connect", CmdConnect, "connect <ip>: Connect to server on ip (default: localhost)");
-        Console.AddCommand("startmatchmake", CmdStartMatchMake, "start the match making");
 
         Console.AddCommand("menu", CmdMenu, "show the main menu");
         Console.AddCommand("load", CmdLoad, "Load level");
@@ -803,20 +802,6 @@ public class Game : MonoBehaviour
             thinClientGameLoop.CmdConnect(args);
         else
             GameDebug.Log("Cannot connect from current gamemode");
-    }
-
-    void CmdStartMatchMake(string[] args)
-    {
-        // Special hack to allow "connect a.b.c.d" as shorthand
-        if (m_gameLoops.Count == 0)
-        {
-            RequestGameLoop(typeof(ClientGameLoop), args);
-            Console.s_PendingCommandsWaitForFrames = 1;
-            return;
-        }
-
-        ClientGameLoop clientGameLoop = GetGameLoop<ClientGameLoop>();
-        ThinClientGameLoop thinClientGameLoop = GetGameLoop<ThinClientGameLoop>();
     }
 
     void CmdThinClient(string[] args)

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grpc.Core;
-using Api;
-using Messages;
+using OpenMatch;
 
 namespace UnityEngine.Ucg.Matchmaking.OpenMatch
 {
     public class OpenMatchClient: IDisposable
     {
+
         private Channel channel;
         readonly Frontend.FrontendClient client;
         Assignment assignment;
@@ -24,14 +24,14 @@ namespace UnityEngine.Ucg.Matchmaking.OpenMatch
             this.client = new Frontend.FrontendClient(channel);
         }
 
-        public void CreatePlayer(Player player)
+        public CreateTicketResponse CreateTicket(Ticket ticket)
         {
-            Log("Calling CreatePlayer with player {0}", player.Id);
-            var request = new CreatePlayerRequest
+            Log("Calling CreateTicket with player {0}", ticket.Id);
+            var request = new CreateTicketRequest
             {
-                Player = player
+                Ticket = ticket
             };
-            var response = client.CreatePlayer(request);
+            return client.CreateTicket(request);
         }
 
         public void Dispose()
@@ -39,28 +39,30 @@ namespace UnityEngine.Ucg.Matchmaking.OpenMatch
             channel.ShutdownAsync().Wait();
         }
 
-        public async Task GetUpdates(Player player)
+        public async Task GetUpdates(Ticket ticket)
         {
             try
             {
-                Log("*** GetUpdates: player {0}", player.Id);
-                var request = new GetUpdatesRequest
+                Log("*** GetAssignments: ticket {0}", ticket.Id);
+                var request = new GetAssignmentsRequest
                 {
-                    Player = player
+                    TicketId = ticket.Id
                 };
 
-                using (var call = client.GetUpdates(request))
+                using (var call = client.GetAssignments(request))
                 {
                     var responseStream = call.ResponseStream;
+                    StringBuilder responseLog = new StringBuilder("Result: ");
                     Log("waiting");
                     while (await responseStream.MoveNext())
                     {
-                        Log("awaiting");
-                        var update = responseStream.Current;
-                        Log(update.Player);
-                        this.assignment = new Assignment();
-                        this.assignment.ConnectionString = update.Player.Assignment;
-                    }
+                        var assignment = responseStream.Current;
+                        Log(assignment.Assignment);
+                        this.assignment = new Assignment
+                        {
+                            ConnectionString = assignment.Assignment.Connection
+                        };
+                    }  
                 }
             }
             catch (RpcException e)

@@ -261,7 +261,6 @@ public class Console
 
     public static void ExecuteCommand(string command)
     {
-        GameDebug.Log("Executing " + command);
         var tokens = Tokenize(command);
         if (tokens.Count < 1)
             return;
@@ -274,13 +273,11 @@ public class Console
 
         if (s_Commands.TryGetValue(commandName, out consoleCommand))
         {
-            GameDebug.Log("Try Get " + command);
             var arguments = tokens.GetRange(1, tokens.Count - 1).ToArray();
             consoleCommand.method(arguments);
         }
         else if (ConfigVar.ConfigVars.TryGetValue(commandName, out configVar))
         {
-            GameDebug.Log("Try get config " + command);
             if (tokens.Count == 2)
             {
                 configVar.Value = tokens[1];
@@ -297,7 +294,6 @@ public class Console
         }
         else
         {
-            GameDebug.Log("Unknown " + command);
             OutputString("Unknown command: " + tokens[0]);
         }
     }

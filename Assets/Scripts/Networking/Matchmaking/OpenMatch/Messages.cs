@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Messages {
+namespace OpenMatch {
 
   /// <summary>Holder for reflection information generated from messages.proto</summary>
   public static partial class MessagesReflection {
@@ -24,36 +24,43 @@ namespace Messages {
     static MessagesReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg5tZXNzYWdlcy5wcm90bxIIbWVzc2FnZXMilAEKC01hdGNoT2JqZWN0EgoK",
-            "AmlkGAEgASgJEhIKCnByb3BlcnRpZXMYAiABKAkSDQoFZXJyb3IYAyABKAkS",
-            "IQoHcm9zdGVycxgEIAMoCzIQLm1lc3NhZ2VzLlJvc3RlchIjCgVwb29scxgF",
-            "IAMoCzIULm1lc3NhZ2VzLlBsYXllclBvb2wSDgoGc3RhdHVzGAYgASgJIjkK",
-            "BlJvc3RlchIMCgRuYW1lGAEgASgJEiEKB3BsYXllcnMYAiADKAsyEC5tZXNz",
-            "YWdlcy5QbGF5ZXIiZQoGRmlsdGVyEgwKBG5hbWUYASABKAkSEQoJYXR0cmli",
-            "dXRlGAIgASgJEgwKBG1heHYYAyABKAMSDAoEbWludhgEIAEoAxIeCgVzdGF0",
-            "cxgFIAEoCzIPLm1lc3NhZ2VzLlN0YXRzIicKBVN0YXRzEg0KBWNvdW50GAEg",
-            "ASgDEg8KB2VsYXBzZWQYAiABKAEifwoKUGxheWVyUG9vbBIMCgRuYW1lGAEg",
-            "ASgJEiEKB2ZpbHRlcnMYAiADKAsyEC5tZXNzYWdlcy5GaWx0ZXISIAoGcm9z",
-            "dGVyGAMgASgLMhAubWVzc2FnZXMuUm9zdGVyEh4KBXN0YXRzGAQgASgLMg8u",
-            "bWVzc2FnZXMuU3RhdHMiwwEKBlBsYXllchIKCgJpZBgBIAEoCRISCgpwcm9w",
-            "ZXJ0aWVzGAIgASgJEgwKBHBvb2wYAyABKAkSLgoKYXR0cmlidXRlcxgEIAMo",
-            "CzIaLm1lc3NhZ2VzLlBsYXllci5BdHRyaWJ1dGUSEgoKYXNzaWdubWVudBgF",
-            "IAEoCRIOCgZzdGF0dXMYBiABKAkSDQoFZXJyb3IYByABKAkaKAoJQXR0cmli",
-            "dXRlEgwKBG5hbWUYASABKAkSDQoFdmFsdWUYAiABKAMiCQoHSWxJbnB1dCJE",
-            "CgtBc3NpZ25tZW50cxIhCgdyb3N0ZXJzGAEgAygLMhAubWVzc2FnZXMuUm9z",
-            "dGVyEhIKCmFzc2lnbm1lbnQYCiABKAlCDVoLaW50ZXJuYWwvcGJiBnByb3Rv",
-            "Mw=="));
+            "Cg5tZXNzYWdlcy5wcm90bxIJb3Blbm1hdGNoGhdnb29nbGUvcnBjL3N0YXR1",
+            "cy5wcm90bxocZ29vZ2xlL3Byb3RvYnVmL3N0cnVjdC5wcm90byJsCgZUaWNr",
+            "ZXQSCgoCaWQYASABKAkSKwoKcHJvcGVydGllcxgCIAEoCzIXLmdvb2dsZS5w",
+            "cm90b2J1Zi5TdHJ1Y3QSKQoKYXNzaWdubWVudBgDIAEoCzIVLm9wZW5tYXRj",
+            "aC5Bc3NpZ25tZW50InAKCkFzc2lnbm1lbnQSEgoKY29ubmVjdGlvbhgBIAEo",
+            "CRIrCgpwcm9wZXJ0aWVzGAIgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cnVj",
+            "dBIhCgVlcnJvchgDIAEoCzISLmdvb2dsZS5ycGMuU3RhdHVzIj8KEEZsb2F0",
+            "UmFuZ2VGaWx0ZXISEQoJYXR0cmlidXRlGAEgASgJEgsKA21heBgCIAEoARIL",
+            "CgNtaW4YAyABKAEiNAoQQm9vbEVxdWFsc0ZpbHRlchIRCglhdHRyaWJ1dGUY",
+            "ASABKAkSDQoFdmFsdWUYAiABKAgiNgoSU3RyaW5nRXF1YWxzRmlsdGVyEhEK",
+            "CWF0dHJpYnV0ZRgBIAEoCRINCgV2YWx1ZRgCIAEoCSLGAQoEUG9vbBIMCgRu",
+            "YW1lGAEgASgJEjgKE2Zsb2F0X3JhbmdlX2ZpbHRlcnMYAiADKAsyGy5vcGVu",
+            "bWF0Y2guRmxvYXRSYW5nZUZpbHRlchI4ChNib29sX2VxdWFsc19maWx0ZXJz",
+            "GAMgAygLMhsub3Blbm1hdGNoLkJvb2xFcXVhbHNGaWx0ZXISPAoVc3RyaW5n",
+            "X2VxdWFsc19maWx0ZXJzGAQgAygLMh0ub3Blbm1hdGNoLlN0cmluZ0VxdWFs",
+            "c0ZpbHRlciIqCgZSb3N0ZXISDAoEbmFtZRgBIAEoCRISCgp0aWNrZXRfaWRz",
+            "GAIgAygJIo0BCgxNYXRjaFByb2ZpbGUSDAoEbmFtZRgBIAEoCRIrCgpwcm9w",
+            "ZXJ0aWVzGAIgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cnVjdBIeCgVwb29s",
+            "cxgDIAMoCzIPLm9wZW5tYXRjaC5Qb29sEiIKB3Jvc3RlcnMYBCADKAsyES5v",
+            "cGVubWF0Y2guUm9zdGVyIr0BCgVNYXRjaBIQCghtYXRjaF9pZBgBIAEoCRIV",
+            "Cg1tYXRjaF9wcm9maWxlGAIgASgJEhYKDm1hdGNoX2Z1bmN0aW9uGAMgASgJ",
+            "EiIKB3RpY2tldHMYBCADKAsyES5vcGVubWF0Y2guVGlja2V0EiIKB3Jvc3Rl",
+            "cnMYBSADKAsyES5vcGVubWF0Y2guUm9zdGVyEisKCnByb3BlcnRpZXMYBiAB",
+            "KAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0Qi5aIG9wZW4tbWF0Y2guZGV2",
+            "L29wZW4tbWF0Y2gvcGtnL3BiqgIJT3Blbk1hdGNoYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { },
+          new pbr::FileDescriptor[] { global::Google.Rpc.StatusReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.StructReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Messages.MatchObject), global::Messages.MatchObject.Parser, new[]{ "Id", "Properties", "Error", "Rosters", "Pools", "Status" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Messages.Roster), global::Messages.Roster.Parser, new[]{ "Name", "Players" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Messages.Filter), global::Messages.Filter.Parser, new[]{ "Name", "Attribute", "Maxv", "Minv", "Stats" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Messages.Stats), global::Messages.Stats.Parser, new[]{ "Count", "Elapsed" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Messages.PlayerPool), global::Messages.PlayerPool.Parser, new[]{ "Name", "Filters", "Roster", "Stats" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Messages.Player), global::Messages.Player.Parser, new[]{ "Id", "Properties", "Pool", "Attributes", "Assignment", "Status", "Error" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Messages.Player.Types.Attribute), global::Messages.Player.Types.Attribute.Parser, new[]{ "Name", "Value" }, null, null, null)}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Messages.IlInput), global::Messages.IlInput.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Messages.Assignments), global::Messages.Assignments.Parser, new[]{ "Rosters", "Assignment" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::OpenMatch.Ticket), global::OpenMatch.Ticket.Parser, new[]{ "Id", "Properties", "Assignment" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::OpenMatch.Assignment), global::OpenMatch.Assignment.Parser, new[]{ "Connection", "Properties", "Error" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::OpenMatch.FloatRangeFilter), global::OpenMatch.FloatRangeFilter.Parser, new[]{ "Attribute", "Max", "Min" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::OpenMatch.BoolEqualsFilter), global::OpenMatch.BoolEqualsFilter.Parser, new[]{ "Attribute", "Value" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::OpenMatch.StringEqualsFilter), global::OpenMatch.StringEqualsFilter.Parser, new[]{ "Attribute", "Value" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::OpenMatch.Pool), global::OpenMatch.Pool.Parser, new[]{ "Name", "FloatRangeFilters", "BoolEqualsFilters", "StringEqualsFilters" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::OpenMatch.Roster), global::OpenMatch.Roster.Parser, new[]{ "Name", "TicketIds" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::OpenMatch.MatchProfile), global::OpenMatch.MatchProfile.Parser, new[]{ "Name", "Properties", "Pools", "Rosters" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::OpenMatch.Match), global::OpenMatch.Match.Parser, new[]{ "MatchId", "MatchProfile", "MatchFunction", "Tickets", "Rosters", "Properties" }, null, null, null)
           }));
     }
     #endregion
@@ -61,27 +68,24 @@ namespace Messages {
   }
   #region Messages
   /// <summary>
-  /// Open Match's internal representation and wire protocol format for "MatchObjects".
-  /// In order to request a match using the Backend API, your backend code should generate
-  /// a new MatchObject with an ID and properties filled in (for more details about valid
-  /// values for these fields, see the documentation).  Open Match then sends the Match
-  /// Object through to your matchmaking function, where you add players to 'rosters' and
-  /// store any schemaless data you wish in the 'properties' field.  The MatchObject
-  /// is then sent, populated, out through the Backend API to your backend code.
-  ///
-  /// MatchObjects contain a number of fields, but many gRPC calls that take a
-  /// MatchObject as input only require a few of them to be filled in.  Check the
-  /// gRPC function in question for more details.
+  /// A Ticket is a basic matchmaking entity in Open Match. In order to enter
+  /// matchmaking using Open Match, the client should generate a Ticket, passing in
+  /// the properties to be associated with this Ticket. Open Match will generate an
+  /// ID for a Ticket during creation. A Ticket could be used to represent an
+  /// individual 'Player' or a 'Group' of players. Open Match will not interpret
+  /// what the Ticket represents but just treat it as a matchmaking unit with a set
+  /// of properties. Open Match stores the Ticket in state storage and enables an
+  /// Assignment to be associated with this Ticket.
   /// </summary>
-  public sealed partial class MatchObject : pb::IMessage<MatchObject> {
-    private static readonly pb::MessageParser<MatchObject> _parser = new pb::MessageParser<MatchObject>(() => new MatchObject());
+  public sealed partial class Ticket : pb::IMessage<Ticket> {
+    private static readonly pb::MessageParser<Ticket> _parser = new pb::MessageParser<Ticket>(() => new Ticket());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<MatchObject> Parser { get { return _parser; } }
+    public static pb::MessageParser<Ticket> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Messages.MessagesReflection.Descriptor.MessageTypes[0]; }
+      get { return global::OpenMatch.MessagesReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -90,33 +94,30 @@ namespace Messages {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public MatchObject() {
+    public Ticket() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public MatchObject(MatchObject other) : this() {
+    public Ticket(Ticket other) : this() {
       id_ = other.id_;
-      properties_ = other.properties_;
-      error_ = other.error_;
-      rosters_ = other.rosters_.Clone();
-      pools_ = other.pools_.Clone();
-      status_ = other.status_;
+      properties_ = other.properties_ != null ? other.properties_.Clone() : null;
+      assignment_ = other.assignment_ != null ? other.assignment_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public MatchObject Clone() {
-      return new MatchObject(this);
+    public Ticket Clone() {
+      return new Ticket(this);
     }
 
     /// <summary>Field number for the "id" field.</summary>
     public const int IdFieldNumber = 1;
     private string id_ = "";
     /// <summary>
-    /// By convention, an Xid
+    /// The Ticket ID generated by Open Match.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Id {
@@ -128,79 +129,40 @@ namespace Messages {
 
     /// <summary>Field number for the "properties" field.</summary>
     public const int PropertiesFieldNumber = 2;
-    private string properties_ = "";
+    private global::Google.Protobuf.WellKnownTypes.Struct properties_;
     /// <summary>
-    /// By convention, a JSON-encoded string
+    /// Properties contains custom info about the ticket.  Top level values can be
+    /// used in indexing and filtering to find tickets.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Properties {
+    public global::Google.Protobuf.WellKnownTypes.Struct Properties {
       get { return properties_; }
       set {
-        properties_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        properties_ = value;
       }
     }
 
-    /// <summary>Field number for the "error" field.</summary>
-    public const int ErrorFieldNumber = 3;
-    private string error_ = "";
+    /// <summary>Field number for the "assignment" field.</summary>
+    public const int AssignmentFieldNumber = 3;
+    private global::OpenMatch.Assignment assignment_;
     /// <summary>
-    /// Last error encountered.
+    /// Assignment associated with the Ticket.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Error {
-      get { return error_; }
+    public global::OpenMatch.Assignment Assignment {
+      get { return assignment_; }
       set {
-        error_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "rosters" field.</summary>
-    public const int RostersFieldNumber = 4;
-    private static readonly pb::FieldCodec<global::Messages.Roster> _repeated_rosters_codec
-        = pb::FieldCodec.ForMessage(34, global::Messages.Roster.Parser);
-    private readonly pbc::RepeatedField<global::Messages.Roster> rosters_ = new pbc::RepeatedField<global::Messages.Roster>();
-    /// <summary>
-    /// Rosters of players.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Messages.Roster> Rosters {
-      get { return rosters_; }
-    }
-
-    /// <summary>Field number for the "pools" field.</summary>
-    public const int PoolsFieldNumber = 5;
-    private static readonly pb::FieldCodec<global::Messages.PlayerPool> _repeated_pools_codec
-        = pb::FieldCodec.ForMessage(42, global::Messages.PlayerPool.Parser);
-    private readonly pbc::RepeatedField<global::Messages.PlayerPool> pools_ = new pbc::RepeatedField<global::Messages.PlayerPool>();
-    /// <summary>
-    /// 'Hard' filters, and the players who match them.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Messages.PlayerPool> Pools {
-      get { return pools_; }
-    }
-
-    /// <summary>Field number for the "status" field.</summary>
-    public const int StatusFieldNumber = 6;
-    private string status_ = "";
-    /// <summary>
-    /// Resulting status of the match function
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Status {
-      get { return status_; }
-      set {
-        status_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        assignment_ = value;
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as MatchObject);
+      return Equals(other as Ticket);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(MatchObject other) {
+    public bool Equals(Ticket other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -208,11 +170,8 @@ namespace Messages {
         return true;
       }
       if (Id != other.Id) return false;
-      if (Properties != other.Properties) return false;
-      if (Error != other.Error) return false;
-      if(!rosters_.Equals(other.rosters_)) return false;
-      if(!pools_.Equals(other.pools_)) return false;
-      if (Status != other.Status) return false;
+      if (!object.Equals(Properties, other.Properties)) return false;
+      if (!object.Equals(Assignment, other.Assignment)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -220,11 +179,8 @@ namespace Messages {
     public override int GetHashCode() {
       int hash = 1;
       if (Id.Length != 0) hash ^= Id.GetHashCode();
-      if (Properties.Length != 0) hash ^= Properties.GetHashCode();
-      if (Error.Length != 0) hash ^= Error.GetHashCode();
-      hash ^= rosters_.GetHashCode();
-      hash ^= pools_.GetHashCode();
-      if (Status.Length != 0) hash ^= Status.GetHashCode();
+      if (properties_ != null) hash ^= Properties.GetHashCode();
+      if (assignment_ != null) hash ^= Assignment.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -242,19 +198,13 @@ namespace Messages {
         output.WriteRawTag(10);
         output.WriteString(Id);
       }
-      if (Properties.Length != 0) {
+      if (properties_ != null) {
         output.WriteRawTag(18);
-        output.WriteString(Properties);
+        output.WriteMessage(Properties);
       }
-      if (Error.Length != 0) {
+      if (assignment_ != null) {
         output.WriteRawTag(26);
-        output.WriteString(Error);
-      }
-      rosters_.WriteTo(output, _repeated_rosters_codec);
-      pools_.WriteTo(output, _repeated_pools_codec);
-      if (Status.Length != 0) {
-        output.WriteRawTag(50);
-        output.WriteString(Status);
+        output.WriteMessage(Assignment);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -267,16 +217,11 @@ namespace Messages {
       if (Id.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Id);
       }
-      if (Properties.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Properties);
+      if (properties_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Properties);
       }
-      if (Error.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Error);
-      }
-      size += rosters_.CalculateSize(_repeated_rosters_codec);
-      size += pools_.CalculateSize(_repeated_pools_codec);
-      if (Status.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Status);
+      if (assignment_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Assignment);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -285,23 +230,24 @@ namespace Messages {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(MatchObject other) {
+    public void MergeFrom(Ticket other) {
       if (other == null) {
         return;
       }
       if (other.Id.Length != 0) {
         Id = other.Id;
       }
-      if (other.Properties.Length != 0) {
-        Properties = other.Properties;
+      if (other.properties_ != null) {
+        if (properties_ == null) {
+          Properties = new global::Google.Protobuf.WellKnownTypes.Struct();
+        }
+        Properties.MergeFrom(other.Properties);
       }
-      if (other.Error.Length != 0) {
-        Error = other.Error;
-      }
-      rosters_.Add(other.rosters_);
-      pools_.Add(other.pools_);
-      if (other.Status.Length != 0) {
-        Status = other.Status;
+      if (other.assignment_ != null) {
+        if (assignment_ == null) {
+          Assignment = new global::OpenMatch.Assignment();
+        }
+        Assignment.MergeFrom(other.Assignment);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -319,23 +265,17 @@ namespace Messages {
             break;
           }
           case 18: {
-            Properties = input.ReadString();
+            if (properties_ == null) {
+              Properties = new global::Google.Protobuf.WellKnownTypes.Struct();
+            }
+            input.ReadMessage(Properties);
             break;
           }
           case 26: {
-            Error = input.ReadString();
-            break;
-          }
-          case 34: {
-            rosters_.AddEntriesFrom(input, _repeated_rosters_codec);
-            break;
-          }
-          case 42: {
-            pools_.AddEntriesFrom(input, _repeated_pools_codec);
-            break;
-          }
-          case 50: {
-            Status = input.ReadString();
+            if (assignment_ == null) {
+              Assignment = new global::OpenMatch.Assignment();
+            }
+            input.ReadMessage(Assignment);
             break;
           }
         }
@@ -345,7 +285,971 @@ namespace Messages {
   }
 
   /// <summary>
-  /// Data structure to hold a list of players in a match.
+  /// An Assignment object represents the assignment associated with a Ticket. Open
+  /// match does not require or inspect any fields on assignment.
+  /// </summary>
+  public sealed partial class Assignment : pb::IMessage<Assignment> {
+    private static readonly pb::MessageParser<Assignment> _parser = new pb::MessageParser<Assignment>(() => new Assignment());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Assignment> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::OpenMatch.MessagesReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Assignment() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Assignment(Assignment other) : this() {
+      connection_ = other.connection_;
+      properties_ = other.properties_ != null ? other.properties_.Clone() : null;
+      error_ = other.error_ != null ? other.error_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Assignment Clone() {
+      return new Assignment(this);
+    }
+
+    /// <summary>Field number for the "connection" field.</summary>
+    public const int ConnectionFieldNumber = 1;
+    private string connection_ = "";
+    /// <summary>
+    /// Connection information for this Assignment.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Connection {
+      get { return connection_; }
+      set {
+        connection_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "properties" field.</summary>
+    public const int PropertiesFieldNumber = 2;
+    private global::Google.Protobuf.WellKnownTypes.Struct properties_;
+    /// <summary>
+    /// Other details to be sent to the players.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Google.Protobuf.WellKnownTypes.Struct Properties {
+      get { return properties_; }
+      set {
+        properties_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "error" field.</summary>
+    public const int ErrorFieldNumber = 3;
+    private global::Google.Rpc.Status error_;
+    /// <summary>
+    /// Error when finding an Assignment for this Ticket.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Google.Rpc.Status Error {
+      get { return error_; }
+      set {
+        error_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Assignment);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Assignment other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Connection != other.Connection) return false;
+      if (!object.Equals(Properties, other.Properties)) return false;
+      if (!object.Equals(Error, other.Error)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Connection.Length != 0) hash ^= Connection.GetHashCode();
+      if (properties_ != null) hash ^= Properties.GetHashCode();
+      if (error_ != null) hash ^= Error.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Connection.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Connection);
+      }
+      if (properties_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Properties);
+      }
+      if (error_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Error);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Connection.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Connection);
+      }
+      if (properties_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Properties);
+      }
+      if (error_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Error);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Assignment other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Connection.Length != 0) {
+        Connection = other.Connection;
+      }
+      if (other.properties_ != null) {
+        if (properties_ == null) {
+          Properties = new global::Google.Protobuf.WellKnownTypes.Struct();
+        }
+        Properties.MergeFrom(other.Properties);
+      }
+      if (other.error_ != null) {
+        if (error_ == null) {
+          Error = new global::Google.Rpc.Status();
+        }
+        Error.MergeFrom(other.Error);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Connection = input.ReadString();
+            break;
+          }
+          case 18: {
+            if (properties_ == null) {
+              Properties = new global::Google.Protobuf.WellKnownTypes.Struct();
+            }
+            input.ReadMessage(Properties);
+            break;
+          }
+          case 26: {
+            if (error_ == null) {
+              Error = new global::Google.Rpc.Status();
+            }
+            input.ReadMessage(Error);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// Filters numerical values to only those within a range.
+  ///   attribute: "foo"
+  ///   max: 10
+  ///   min: 5
+  /// matches:
+  ///   {"foo": 5}
+  ///   {"foo": 7.5}
+  ///   {"foo": 10}
+  /// does not match:
+  ///   {"foo": 4}
+  ///   {"foo": 10.01}
+  ///   {"foo": "7.5"}
+  ///   {"foo": true}
+  ///   {"foo": [7.5]}
+  ///   {"foo": null}
+  ///   {}
+  /// </summary>
+  public sealed partial class FloatRangeFilter : pb::IMessage<FloatRangeFilter> {
+    private static readonly pb::MessageParser<FloatRangeFilter> _parser = new pb::MessageParser<FloatRangeFilter>(() => new FloatRangeFilter());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<FloatRangeFilter> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::OpenMatch.MessagesReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FloatRangeFilter() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FloatRangeFilter(FloatRangeFilter other) : this() {
+      attribute_ = other.attribute_;
+      max_ = other.max_;
+      min_ = other.min_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FloatRangeFilter Clone() {
+      return new FloatRangeFilter(this);
+    }
+
+    /// <summary>Field number for the "attribute" field.</summary>
+    public const int AttributeFieldNumber = 1;
+    private string attribute_ = "";
+    /// <summary>
+    /// Name of the ticket attribute this Filter operates on.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Attribute {
+      get { return attribute_; }
+      set {
+        attribute_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "max" field.</summary>
+    public const int MaxFieldNumber = 2;
+    private double max_;
+    /// <summary>
+    /// Maximum value. Defaults to positive infinity (any value above minv).
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double Max {
+      get { return max_; }
+      set {
+        max_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "min" field.</summary>
+    public const int MinFieldNumber = 3;
+    private double min_;
+    /// <summary>
+    /// Minimum value. Defaults to 0.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double Min {
+      get { return min_; }
+      set {
+        min_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as FloatRangeFilter);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(FloatRangeFilter other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Attribute != other.Attribute) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Max, other.Max)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Min, other.Min)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Attribute.Length != 0) hash ^= Attribute.GetHashCode();
+      if (Max != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Max);
+      if (Min != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Min);
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Attribute.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Attribute);
+      }
+      if (Max != 0D) {
+        output.WriteRawTag(17);
+        output.WriteDouble(Max);
+      }
+      if (Min != 0D) {
+        output.WriteRawTag(25);
+        output.WriteDouble(Min);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Attribute.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Attribute);
+      }
+      if (Max != 0D) {
+        size += 1 + 8;
+      }
+      if (Min != 0D) {
+        size += 1 + 8;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(FloatRangeFilter other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Attribute.Length != 0) {
+        Attribute = other.Attribute;
+      }
+      if (other.Max != 0D) {
+        Max = other.Max;
+      }
+      if (other.Min != 0D) {
+        Min = other.Min;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Attribute = input.ReadString();
+            break;
+          }
+          case 17: {
+            Max = input.ReadDouble();
+            break;
+          }
+          case 25: {
+            Min = input.ReadDouble();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// Filters boolean values.
+  ///   attribute: "foo"
+  ///   value: false
+  /// matches:
+  ///   {"foo": false}
+  /// does not match:
+  ///   {"foo": true}
+  ///   {"foo": "bar"}
+  ///   {"foo": 1}
+  ///   {"foo": "false"}
+  ///   {"foo": [false]}
+  ///   {"foo": null}
+  ///   {}
+  /// </summary>
+  public sealed partial class BoolEqualsFilter : pb::IMessage<BoolEqualsFilter> {
+    private static readonly pb::MessageParser<BoolEqualsFilter> _parser = new pb::MessageParser<BoolEqualsFilter>(() => new BoolEqualsFilter());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<BoolEqualsFilter> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::OpenMatch.MessagesReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BoolEqualsFilter() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BoolEqualsFilter(BoolEqualsFilter other) : this() {
+      attribute_ = other.attribute_;
+      value_ = other.value_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BoolEqualsFilter Clone() {
+      return new BoolEqualsFilter(this);
+    }
+
+    /// <summary>Field number for the "attribute" field.</summary>
+    public const int AttributeFieldNumber = 1;
+    private string attribute_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Attribute {
+      get { return attribute_; }
+      set {
+        attribute_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "value" field.</summary>
+    public const int ValueFieldNumber = 2;
+    private bool value_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Value {
+      get { return value_; }
+      set {
+        value_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as BoolEqualsFilter);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(BoolEqualsFilter other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Attribute != other.Attribute) return false;
+      if (Value != other.Value) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Attribute.Length != 0) hash ^= Attribute.GetHashCode();
+      if (Value != false) hash ^= Value.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Attribute.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Attribute);
+      }
+      if (Value != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(Value);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Attribute.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Attribute);
+      }
+      if (Value != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(BoolEqualsFilter other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Attribute.Length != 0) {
+        Attribute = other.Attribute;
+      }
+      if (other.Value != false) {
+        Value = other.Value;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Attribute = input.ReadString();
+            break;
+          }
+          case 16: {
+            Value = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// Filters strings exactly equaling a value.
+  ///   attribute: "foo"
+  ///   value: "bar"
+  /// matches:
+  ///   {"foo": "bar"}
+  /// does not match:
+  ///   {"foo": "baz"}
+  ///   {"foo": true}
+  ///   {"foo": 5}
+  ///   {"foo": ["bar"]}
+  ///   {"foo": null}
+  ///   {}
+  /// </summary>
+  public sealed partial class StringEqualsFilter : pb::IMessage<StringEqualsFilter> {
+    private static readonly pb::MessageParser<StringEqualsFilter> _parser = new pb::MessageParser<StringEqualsFilter>(() => new StringEqualsFilter());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<StringEqualsFilter> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::OpenMatch.MessagesReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public StringEqualsFilter() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public StringEqualsFilter(StringEqualsFilter other) : this() {
+      attribute_ = other.attribute_;
+      value_ = other.value_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public StringEqualsFilter Clone() {
+      return new StringEqualsFilter(this);
+    }
+
+    /// <summary>Field number for the "attribute" field.</summary>
+    public const int AttributeFieldNumber = 1;
+    private string attribute_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Attribute {
+      get { return attribute_; }
+      set {
+        attribute_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "value" field.</summary>
+    public const int ValueFieldNumber = 2;
+    private string value_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Value {
+      get { return value_; }
+      set {
+        value_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as StringEqualsFilter);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(StringEqualsFilter other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Attribute != other.Attribute) return false;
+      if (Value != other.Value) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Attribute.Length != 0) hash ^= Attribute.GetHashCode();
+      if (Value.Length != 0) hash ^= Value.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Attribute.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Attribute);
+      }
+      if (Value.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Value);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Attribute.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Attribute);
+      }
+      if (Value.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Value);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(StringEqualsFilter other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Attribute.Length != 0) {
+        Attribute = other.Attribute;
+      }
+      if (other.Value.Length != 0) {
+        Value = other.Value;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Attribute = input.ReadString();
+            break;
+          }
+          case 18: {
+            Value = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class Pool : pb::IMessage<Pool> {
+    private static readonly pb::MessageParser<Pool> _parser = new pb::MessageParser<Pool>(() => new Pool());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Pool> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::OpenMatch.MessagesReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Pool() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Pool(Pool other) : this() {
+      name_ = other.name_;
+      floatRangeFilters_ = other.floatRangeFilters_.Clone();
+      boolEqualsFilters_ = other.boolEqualsFilters_.Clone();
+      stringEqualsFilters_ = other.stringEqualsFilters_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Pool Clone() {
+      return new Pool(this);
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 1;
+    private string name_ = "";
+    /// <summary>
+    /// A developer-chosen human-readable name for this Pool.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "float_range_filters" field.</summary>
+    public const int FloatRangeFiltersFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::OpenMatch.FloatRangeFilter> _repeated_floatRangeFilters_codec
+        = pb::FieldCodec.ForMessage(18, global::OpenMatch.FloatRangeFilter.Parser);
+    private readonly pbc::RepeatedField<global::OpenMatch.FloatRangeFilter> floatRangeFilters_ = new pbc::RepeatedField<global::OpenMatch.FloatRangeFilter>();
+    /// <summary>
+    /// Set of Filters indicating the filtering criteria. Selected players must
+    /// match every Filter.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::OpenMatch.FloatRangeFilter> FloatRangeFilters {
+      get { return floatRangeFilters_; }
+    }
+
+    /// <summary>Field number for the "bool_equals_filters" field.</summary>
+    public const int BoolEqualsFiltersFieldNumber = 3;
+    private static readonly pb::FieldCodec<global::OpenMatch.BoolEqualsFilter> _repeated_boolEqualsFilters_codec
+        = pb::FieldCodec.ForMessage(26, global::OpenMatch.BoolEqualsFilter.Parser);
+    private readonly pbc::RepeatedField<global::OpenMatch.BoolEqualsFilter> boolEqualsFilters_ = new pbc::RepeatedField<global::OpenMatch.BoolEqualsFilter>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::OpenMatch.BoolEqualsFilter> BoolEqualsFilters {
+      get { return boolEqualsFilters_; }
+    }
+
+    /// <summary>Field number for the "string_equals_filters" field.</summary>
+    public const int StringEqualsFiltersFieldNumber = 4;
+    private static readonly pb::FieldCodec<global::OpenMatch.StringEqualsFilter> _repeated_stringEqualsFilters_codec
+        = pb::FieldCodec.ForMessage(34, global::OpenMatch.StringEqualsFilter.Parser);
+    private readonly pbc::RepeatedField<global::OpenMatch.StringEqualsFilter> stringEqualsFilters_ = new pbc::RepeatedField<global::OpenMatch.StringEqualsFilter>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::OpenMatch.StringEqualsFilter> StringEqualsFilters {
+      get { return stringEqualsFilters_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Pool);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Pool other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Name != other.Name) return false;
+      if(!floatRangeFilters_.Equals(other.floatRangeFilters_)) return false;
+      if(!boolEqualsFilters_.Equals(other.boolEqualsFilters_)) return false;
+      if(!stringEqualsFilters_.Equals(other.stringEqualsFilters_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      hash ^= floatRangeFilters_.GetHashCode();
+      hash ^= boolEqualsFilters_.GetHashCode();
+      hash ^= stringEqualsFilters_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      floatRangeFilters_.WriteTo(output, _repeated_floatRangeFilters_codec);
+      boolEqualsFilters_.WriteTo(output, _repeated_boolEqualsFilters_codec);
+      stringEqualsFilters_.WriteTo(output, _repeated_stringEqualsFilters_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      size += floatRangeFilters_.CalculateSize(_repeated_floatRangeFilters_codec);
+      size += boolEqualsFilters_.CalculateSize(_repeated_boolEqualsFilters_codec);
+      size += stringEqualsFilters_.CalculateSize(_repeated_stringEqualsFilters_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Pool other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      floatRangeFilters_.Add(other.floatRangeFilters_);
+      boolEqualsFilters_.Add(other.boolEqualsFilters_);
+      stringEqualsFilters_.Add(other.stringEqualsFilters_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 18: {
+            floatRangeFilters_.AddEntriesFrom(input, _repeated_floatRangeFilters_codec);
+            break;
+          }
+          case 26: {
+            boolEqualsFilters_.AddEntriesFrom(input, _repeated_boolEqualsFilters_codec);
+            break;
+          }
+          case 34: {
+            stringEqualsFilters_.AddEntriesFrom(input, _repeated_stringEqualsFilters_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// A Roster is a named collection of Ticket IDs. It exists so that a Tickets
+  /// associated with a Match can be labelled to belong to a team, sub-team etc. It
+  /// can also be used to represent the current state of a Match in scenarios such
+  /// as backfill, join-in-progress etc.
   /// </summary>
   public sealed partial class Roster : pb::IMessage<Roster> {
     private static readonly pb::MessageParser<Roster> _parser = new pb::MessageParser<Roster>(() => new Roster());
@@ -355,7 +1259,7 @@ namespace Messages {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Messages.MessagesReflection.Descriptor.MessageTypes[1]; }
+      get { return global::OpenMatch.MessagesReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -373,7 +1277,7 @@ namespace Messages {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Roster(Roster other) : this() {
       name_ = other.name_;
-      players_ = other.players_.Clone();
+      ticketIds_ = other.ticketIds_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -386,7 +1290,7 @@ namespace Messages {
     public const int NameFieldNumber = 1;
     private string name_ = "";
     /// <summary>
-    /// Arbitrary developer-chosen, human-readable string. By convention, set to team name.
+    /// A developer-chosen human-readable name for this Roster.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Name {
@@ -396,17 +1300,17 @@ namespace Messages {
       }
     }
 
-    /// <summary>Field number for the "players" field.</summary>
-    public const int PlayersFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::Messages.Player> _repeated_players_codec
-        = pb::FieldCodec.ForMessage(18, global::Messages.Player.Parser);
-    private readonly pbc::RepeatedField<global::Messages.Player> players_ = new pbc::RepeatedField<global::Messages.Player>();
+    /// <summary>Field number for the "ticket_ids" field.</summary>
+    public const int TicketIdsFieldNumber = 2;
+    private static readonly pb::FieldCodec<string> _repeated_ticketIds_codec
+        = pb::FieldCodec.ForString(18);
+    private readonly pbc::RepeatedField<string> ticketIds_ = new pbc::RepeatedField<string>();
     /// <summary>
-    /// Player profiles on this roster.
+    /// Tickets belonging to this Roster.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Messages.Player> Players {
-      get { return players_; }
+    public pbc::RepeatedField<string> TicketIds {
+      get { return ticketIds_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -423,7 +1327,7 @@ namespace Messages {
         return true;
       }
       if (Name != other.Name) return false;
-      if(!players_.Equals(other.players_)) return false;
+      if(!ticketIds_.Equals(other.ticketIds_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -431,7 +1335,7 @@ namespace Messages {
     public override int GetHashCode() {
       int hash = 1;
       if (Name.Length != 0) hash ^= Name.GetHashCode();
-      hash ^= players_.GetHashCode();
+      hash ^= ticketIds_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -449,7 +1353,7 @@ namespace Messages {
         output.WriteRawTag(10);
         output.WriteString(Name);
       }
-      players_.WriteTo(output, _repeated_players_codec);
+      ticketIds_.WriteTo(output, _repeated_ticketIds_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -461,7 +1365,7 @@ namespace Messages {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      size += players_.CalculateSize(_repeated_players_codec);
+      size += ticketIds_.CalculateSize(_repeated_ticketIds_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -476,7 +1380,7 @@ namespace Messages {
       if (other.Name.Length != 0) {
         Name = other.Name;
       }
-      players_.Add(other.players_);
+      ticketIds_.Add(other.ticketIds_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -493,7 +1397,7 @@ namespace Messages {
             break;
           }
           case 18: {
-            players_.AddEntriesFrom(input, _repeated_players_codec);
+            ticketIds_.AddEntriesFrom(input, _repeated_ticketIds_codec);
             break;
           }
         }
@@ -503,17 +1407,21 @@ namespace Messages {
   }
 
   /// <summary>
-  /// A 'hard' filter to apply to the player pool.
+  /// A MatchProfile is Open Match's representation of a Match specification. It is
+  /// used to indicate the criteria for selecting players for a match. A
+  /// MatchProfile is the input to the API to get matches and is passed to the
+  /// MatchFunction. It contains all the information required by the MatchFunction
+  /// to generate match proposals.
   /// </summary>
-  public sealed partial class Filter : pb::IMessage<Filter> {
-    private static readonly pb::MessageParser<Filter> _parser = new pb::MessageParser<Filter>(() => new Filter());
+  public sealed partial class MatchProfile : pb::IMessage<MatchProfile> {
+    private static readonly pb::MessageParser<MatchProfile> _parser = new pb::MessageParser<MatchProfile>(() => new MatchProfile());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Filter> Parser { get { return _parser; } }
+    public static pb::MessageParser<MatchProfile> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Messages.MessagesReflection.Descriptor.MessageTypes[2]; }
+      get { return global::OpenMatch.MessagesReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -522,834 +1430,114 @@ namespace Messages {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Filter() {
+    public MatchProfile() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Filter(Filter other) : this() {
+    public MatchProfile(MatchProfile other) : this() {
       name_ = other.name_;
-      attribute_ = other.attribute_;
-      maxv_ = other.maxv_;
-      minv_ = other.minv_;
-      stats_ = other.stats_ != null ? other.stats_.Clone() : null;
+      properties_ = other.properties_ != null ? other.properties_.Clone() : null;
+      pools_ = other.pools_.Clone();
+      rosters_ = other.rosters_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Filter Clone() {
-      return new Filter(this);
+    public MatchProfile Clone() {
+      return new MatchProfile(this);
     }
 
     /// <summary>Field number for the "name" field.</summary>
     public const int NameFieldNumber = 1;
     private string name_ = "";
     /// <summary>
-    /// Arbitrary developer-chosen, human-readable name of this filter. Appears in logs and metrics.
+    /// Name of this match profile.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Name {
       get { return name_; }
       set {
         name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "attribute" field.</summary>
-    public const int AttributeFieldNumber = 2;
-    private string attribute_ = "";
-    /// <summary>
-    /// Name of the player attribute this filter operates on.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Attribute {
-      get { return attribute_; }
-      set {
-        attribute_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "maxv" field.</summary>
-    public const int MaxvFieldNumber = 3;
-    private long maxv_;
-    /// <summary>
-    /// Maximum value.  Defaults to positive infinity (any value above minv).
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long Maxv {
-      get { return maxv_; }
-      set {
-        maxv_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "minv" field.</summary>
-    public const int MinvFieldNumber = 4;
-    private long minv_;
-    /// <summary>
-    /// Minimum value.  Defaults to 0.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long Minv {
-      get { return minv_; }
-      set {
-        minv_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "stats" field.</summary>
-    public const int StatsFieldNumber = 5;
-    private global::Messages.Stats stats_;
-    /// <summary>
-    /// Statistics for the last time the filter was applied.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Messages.Stats Stats {
-      get { return stats_; }
-      set {
-        stats_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as Filter);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Filter other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Name != other.Name) return false;
-      if (Attribute != other.Attribute) return false;
-      if (Maxv != other.Maxv) return false;
-      if (Minv != other.Minv) return false;
-      if (!object.Equals(Stats, other.Stats)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
-      if (Attribute.Length != 0) hash ^= Attribute.GetHashCode();
-      if (Maxv != 0L) hash ^= Maxv.GetHashCode();
-      if (Minv != 0L) hash ^= Minv.GetHashCode();
-      if (stats_ != null) hash ^= Stats.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (Name.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Name);
-      }
-      if (Attribute.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Attribute);
-      }
-      if (Maxv != 0L) {
-        output.WriteRawTag(24);
-        output.WriteInt64(Maxv);
-      }
-      if (Minv != 0L) {
-        output.WriteRawTag(32);
-        output.WriteInt64(Minv);
-      }
-      if (stats_ != null) {
-        output.WriteRawTag(42);
-        output.WriteMessage(Stats);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (Name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
-      }
-      if (Attribute.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Attribute);
-      }
-      if (Maxv != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Maxv);
-      }
-      if (Minv != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Minv);
-      }
-      if (stats_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Stats);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Filter other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Name.Length != 0) {
-        Name = other.Name;
-      }
-      if (other.Attribute.Length != 0) {
-        Attribute = other.Attribute;
-      }
-      if (other.Maxv != 0L) {
-        Maxv = other.Maxv;
-      }
-      if (other.Minv != 0L) {
-        Minv = other.Minv;
-      }
-      if (other.stats_ != null) {
-        if (stats_ == null) {
-          stats_ = new global::Messages.Stats();
-        }
-        Stats.MergeFrom(other.Stats);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            Name = input.ReadString();
-            break;
-          }
-          case 18: {
-            Attribute = input.ReadString();
-            break;
-          }
-          case 24: {
-            Maxv = input.ReadInt64();
-            break;
-          }
-          case 32: {
-            Minv = input.ReadInt64();
-            break;
-          }
-          case 42: {
-            if (stats_ == null) {
-              stats_ = new global::Messages.Stats();
-            }
-            input.ReadMessage(stats_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  /// <summary>
-  /// Holds statistics
-  /// </summary>
-  public sealed partial class Stats : pb::IMessage<Stats> {
-    private static readonly pb::MessageParser<Stats> _parser = new pb::MessageParser<Stats>(() => new Stats());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Stats> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Messages.MessagesReflection.Descriptor.MessageTypes[3]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Stats() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Stats(Stats other) : this() {
-      count_ = other.count_;
-      elapsed_ = other.elapsed_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Stats Clone() {
-      return new Stats(this);
-    }
-
-    /// <summary>Field number for the "count" field.</summary>
-    public const int CountFieldNumber = 1;
-    private long count_;
-    /// <summary>
-    /// Number of results.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long Count {
-      get { return count_; }
-      set {
-        count_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "elapsed" field.</summary>
-    public const int ElapsedFieldNumber = 2;
-    private double elapsed_;
-    /// <summary>
-    /// How long it took to get the results.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public double Elapsed {
-      get { return elapsed_; }
-      set {
-        elapsed_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as Stats);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Stats other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Count != other.Count) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Elapsed, other.Elapsed)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Count != 0L) hash ^= Count.GetHashCode();
-      if (Elapsed != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Elapsed);
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (Count != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(Count);
-      }
-      if (Elapsed != 0D) {
-        output.WriteRawTag(17);
-        output.WriteDouble(Elapsed);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (Count != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Count);
-      }
-      if (Elapsed != 0D) {
-        size += 1 + 8;
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Stats other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Count != 0L) {
-        Count = other.Count;
-      }
-      if (other.Elapsed != 0D) {
-        Elapsed = other.Elapsed;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            Count = input.ReadInt64();
-            break;
-          }
-          case 17: {
-            Elapsed = input.ReadDouble();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  /// <summary>
-  /// PlayerPools are defined by a set of 'hard' filters, and can be filled in
-  /// with the players that match those filters.
-  ///
-  /// PlayerPools contain a number of fields, but many gRPC calls that take a
-  /// PlayerPool as input only require a few of them to be filled in.  Check the
-  /// gRPC function in question for more details.
-  /// </summary>
-  public sealed partial class PlayerPool : pb::IMessage<PlayerPool> {
-    private static readonly pb::MessageParser<PlayerPool> _parser = new pb::MessageParser<PlayerPool>(() => new PlayerPool());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<PlayerPool> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Messages.MessagesReflection.Descriptor.MessageTypes[4]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PlayerPool() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PlayerPool(PlayerPool other) : this() {
-      name_ = other.name_;
-      filters_ = other.filters_.Clone();
-      roster_ = other.roster_ != null ? other.roster_.Clone() : null;
-      stats_ = other.stats_ != null ? other.stats_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PlayerPool Clone() {
-      return new PlayerPool(this);
-    }
-
-    /// <summary>Field number for the "name" field.</summary>
-    public const int NameFieldNumber = 1;
-    private string name_ = "";
-    /// <summary>
-    /// Arbitrary developer-chosen, human-readable string.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Name {
-      get { return name_; }
-      set {
-        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "filters" field.</summary>
-    public const int FiltersFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::Messages.Filter> _repeated_filters_codec
-        = pb::FieldCodec.ForMessage(18, global::Messages.Filter.Parser);
-    private readonly pbc::RepeatedField<global::Messages.Filter> filters_ = new pbc::RepeatedField<global::Messages.Filter>();
-    /// <summary>
-    /// Filters are logical AND-ed (a player must match every filter).
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Messages.Filter> Filters {
-      get { return filters_; }
-    }
-
-    /// <summary>Field number for the "roster" field.</summary>
-    public const int RosterFieldNumber = 3;
-    private global::Messages.Roster roster_;
-    /// <summary>
-    /// Roster of players that match all filters.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Messages.Roster Roster {
-      get { return roster_; }
-      set {
-        roster_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "stats" field.</summary>
-    public const int StatsFieldNumber = 4;
-    private global::Messages.Stats stats_;
-    /// <summary>
-    /// Statisticss for the last time this Pool was retrieved from state storage.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Messages.Stats Stats {
-      get { return stats_; }
-      set {
-        stats_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as PlayerPool);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(PlayerPool other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Name != other.Name) return false;
-      if(!filters_.Equals(other.filters_)) return false;
-      if (!object.Equals(Roster, other.Roster)) return false;
-      if (!object.Equals(Stats, other.Stats)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
-      hash ^= filters_.GetHashCode();
-      if (roster_ != null) hash ^= Roster.GetHashCode();
-      if (stats_ != null) hash ^= Stats.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (Name.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Name);
-      }
-      filters_.WriteTo(output, _repeated_filters_codec);
-      if (roster_ != null) {
-        output.WriteRawTag(26);
-        output.WriteMessage(Roster);
-      }
-      if (stats_ != null) {
-        output.WriteRawTag(34);
-        output.WriteMessage(Stats);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (Name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
-      }
-      size += filters_.CalculateSize(_repeated_filters_codec);
-      if (roster_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Roster);
-      }
-      if (stats_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Stats);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(PlayerPool other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Name.Length != 0) {
-        Name = other.Name;
-      }
-      filters_.Add(other.filters_);
-      if (other.roster_ != null) {
-        if (roster_ == null) {
-          roster_ = new global::Messages.Roster();
-        }
-        Roster.MergeFrom(other.Roster);
-      }
-      if (other.stats_ != null) {
-        if (stats_ == null) {
-          stats_ = new global::Messages.Stats();
-        }
-        Stats.MergeFrom(other.Stats);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            Name = input.ReadString();
-            break;
-          }
-          case 18: {
-            filters_.AddEntriesFrom(input, _repeated_filters_codec);
-            break;
-          }
-          case 26: {
-            if (roster_ == null) {
-              roster_ = new global::Messages.Roster();
-            }
-            input.ReadMessage(roster_);
-            break;
-          }
-          case 34: {
-            if (stats_ == null) {
-              stats_ = new global::Messages.Stats();
-            }
-            input.ReadMessage(stats_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  /// <summary>
-  /// Open Match's internal representation and wire protocol format for "Players".
-  /// In order to enter matchmaking using the Frontend API, your client code should generate
-  /// a consistent (same result for each client every time they launch) with an ID and
-  /// properties filled in (for more details about valid values for these fields,
-  /// see the documentation).
-  /// Players contain a number of fields, but the gRPC calls that take a
-  /// Player as input only require a few of them to be filled in.  Check the
-  /// gRPC function in question for more details.
-  /// </summary>
-  public sealed partial class Player : pb::IMessage<Player> {
-    private static readonly pb::MessageParser<Player> _parser = new pb::MessageParser<Player>(() => new Player());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Player> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Messages.MessagesReflection.Descriptor.MessageTypes[5]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Player() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Player(Player other) : this() {
-      id_ = other.id_;
-      properties_ = other.properties_;
-      pool_ = other.pool_;
-      attributes_ = other.attributes_.Clone();
-      assignment_ = other.assignment_;
-      status_ = other.status_;
-      error_ = other.error_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Player Clone() {
-      return new Player(this);
-    }
-
-    /// <summary>Field number for the "id" field.</summary>
-    public const int IdFieldNumber = 1;
-    private string id_ = "";
-    /// <summary>
-    /// By convention, an Xid
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Id {
-      get { return id_; }
-      set {
-        id_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
     /// <summary>Field number for the "properties" field.</summary>
     public const int PropertiesFieldNumber = 2;
-    private string properties_ = "";
+    private global::Google.Protobuf.WellKnownTypes.Struct properties_;
     /// <summary>
-    /// By convention, a JSON-encoded string
+    /// Set of properties associated with this MatchProfile. (Optional)
+    /// Open Match does not interpret these properties but passes them through to
+    /// the MatchFunction.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Properties {
+    public global::Google.Protobuf.WellKnownTypes.Struct Properties {
       get { return properties_; }
       set {
-        properties_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        properties_ = value;
       }
     }
 
-    /// <summary>Field number for the "pool" field.</summary>
-    public const int PoolFieldNumber = 3;
-    private string pool_ = "";
+    /// <summary>Field number for the "pools" field.</summary>
+    public const int PoolsFieldNumber = 3;
+    private static readonly pb::FieldCodec<global::OpenMatch.Pool> _repeated_pools_codec
+        = pb::FieldCodec.ForMessage(26, global::OpenMatch.Pool.Parser);
+    private readonly pbc::RepeatedField<global::OpenMatch.Pool> pools_ = new pbc::RepeatedField<global::OpenMatch.Pool>();
     /// <summary>
-    /// Optionally used to specify the PlayerPool in which to find a player.
+    /// Set of pools to be queried when generating a match for this MatchProfile.
+    /// The pool names can be used in empty Rosters to specify composition of a
+    /// match.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Pool {
-      get { return pool_; }
-      set {
-        pool_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
+    public pbc::RepeatedField<global::OpenMatch.Pool> Pools {
+      get { return pools_; }
     }
 
-    /// <summary>Field number for the "attributes" field.</summary>
-    public const int AttributesFieldNumber = 4;
-    private static readonly pb::FieldCodec<global::Messages.Player.Types.Attribute> _repeated_attributes_codec
-        = pb::FieldCodec.ForMessage(34, global::Messages.Player.Types.Attribute.Parser);
-    private readonly pbc::RepeatedField<global::Messages.Player.Types.Attribute> attributes_ = new pbc::RepeatedField<global::Messages.Player.Types.Attribute>();
+    /// <summary>Field number for the "rosters" field.</summary>
+    public const int RostersFieldNumber = 4;
+    private static readonly pb::FieldCodec<global::OpenMatch.Roster> _repeated_rosters_codec
+        = pb::FieldCodec.ForMessage(34, global::OpenMatch.Roster.Parser);
+    private readonly pbc::RepeatedField<global::OpenMatch.Roster> rosters_ = new pbc::RepeatedField<global::OpenMatch.Roster>();
     /// <summary>
-    /// Attributes of this player.
+    /// Set of Rosters for this match request. Could be empty Rosters used to
+    /// indicate the composition of the generated Match or they could be partially
+    /// pre-populated Ticket list to be used in scenarios such as backfill / join
+    /// in progress.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Messages.Player.Types.Attribute> Attributes {
-      get { return attributes_; }
-    }
-
-    /// <summary>Field number for the "assignment" field.</summary>
-    public const int AssignmentFieldNumber = 5;
-    private string assignment_ = "";
-    /// <summary>
-    /// By convention, ip:port of a DGS to connect to
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Assignment {
-      get { return assignment_; }
-      set {
-        assignment_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "status" field.</summary>
-    public const int StatusFieldNumber = 6;
-    private string status_ = "";
-    /// <summary>
-    /// Arbitrary developer-chosen string.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Status {
-      get { return status_; }
-      set {
-        status_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "error" field.</summary>
-    public const int ErrorFieldNumber = 7;
-    private string error_ = "";
-    /// <summary>
-    /// Arbitrary developer-chosen string.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Error {
-      get { return error_; }
-      set {
-        error_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
+    public pbc::RepeatedField<global::OpenMatch.Roster> Rosters {
+      get { return rosters_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as Player);
+      return Equals(other as MatchProfile);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Player other) {
+    public bool Equals(MatchProfile other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Id != other.Id) return false;
-      if (Properties != other.Properties) return false;
-      if (Pool != other.Pool) return false;
-      if(!attributes_.Equals(other.attributes_)) return false;
-      if (Assignment != other.Assignment) return false;
-      if (Status != other.Status) return false;
-      if (Error != other.Error) return false;
+      if (Name != other.Name) return false;
+      if (!object.Equals(Properties, other.Properties)) return false;
+      if(!pools_.Equals(other.pools_)) return false;
+      if(!rosters_.Equals(other.rosters_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Id.Length != 0) hash ^= Id.GetHashCode();
-      if (Properties.Length != 0) hash ^= Properties.GetHashCode();
-      if (Pool.Length != 0) hash ^= Pool.GetHashCode();
-      hash ^= attributes_.GetHashCode();
-      if (Assignment.Length != 0) hash ^= Assignment.GetHashCode();
-      if (Status.Length != 0) hash ^= Status.GetHashCode();
-      if (Error.Length != 0) hash ^= Error.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (properties_ != null) hash ^= Properties.GetHashCode();
+      hash ^= pools_.GetHashCode();
+      hash ^= rosters_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1363,31 +1551,16 @@ namespace Messages {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Id.Length != 0) {
+      if (Name.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(Id);
+        output.WriteString(Name);
       }
-      if (Properties.Length != 0) {
+      if (properties_ != null) {
         output.WriteRawTag(18);
-        output.WriteString(Properties);
+        output.WriteMessage(Properties);
       }
-      if (Pool.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Pool);
-      }
-      attributes_.WriteTo(output, _repeated_attributes_codec);
-      if (Assignment.Length != 0) {
-        output.WriteRawTag(42);
-        output.WriteString(Assignment);
-      }
-      if (Status.Length != 0) {
-        output.WriteRawTag(50);
-        output.WriteString(Status);
-      }
-      if (Error.Length != 0) {
-        output.WriteRawTag(58);
-        output.WriteString(Error);
-      }
+      pools_.WriteTo(output, _repeated_pools_codec);
+      rosters_.WriteTo(output, _repeated_rosters_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1396,25 +1569,14 @@ namespace Messages {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Id.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Id);
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      if (Properties.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Properties);
+      if (properties_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Properties);
       }
-      if (Pool.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Pool);
-      }
-      size += attributes_.CalculateSize(_repeated_attributes_codec);
-      if (Assignment.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Assignment);
-      }
-      if (Status.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Status);
-      }
-      if (Error.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Error);
-      }
+      size += pools_.CalculateSize(_repeated_pools_codec);
+      size += rosters_.CalculateSize(_repeated_rosters_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1422,29 +1584,21 @@ namespace Messages {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Player other) {
+    public void MergeFrom(MatchProfile other) {
       if (other == null) {
         return;
       }
-      if (other.Id.Length != 0) {
-        Id = other.Id;
+      if (other.Name.Length != 0) {
+        Name = other.Name;
       }
-      if (other.Properties.Length != 0) {
-        Properties = other.Properties;
+      if (other.properties_ != null) {
+        if (properties_ == null) {
+          Properties = new global::Google.Protobuf.WellKnownTypes.Struct();
+        }
+        Properties.MergeFrom(other.Properties);
       }
-      if (other.Pool.Length != 0) {
-        Pool = other.Pool;
-      }
-      attributes_.Add(other.attributes_);
-      if (other.Assignment.Length != 0) {
-        Assignment = other.Assignment;
-      }
-      if (other.Status.Length != 0) {
-        Status = other.Status;
-      }
-      if (other.Error.Length != 0) {
-        Error = other.Error;
-      }
+      pools_.Add(other.pools_);
+      rosters_.Add(other.rosters_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1457,218 +1611,46 @@ namespace Messages {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            Id = input.ReadString();
+            Name = input.ReadString();
             break;
           }
           case 18: {
-            Properties = input.ReadString();
+            if (properties_ == null) {
+              Properties = new global::Google.Protobuf.WellKnownTypes.Struct();
+            }
+            input.ReadMessage(Properties);
             break;
           }
           case 26: {
-            Pool = input.ReadString();
+            pools_.AddEntriesFrom(input, _repeated_pools_codec);
             break;
           }
           case 34: {
-            attributes_.AddEntriesFrom(input, _repeated_attributes_codec);
-            break;
-          }
-          case 42: {
-            Assignment = input.ReadString();
-            break;
-          }
-          case 50: {
-            Status = input.ReadString();
-            break;
-          }
-          case 58: {
-            Error = input.ReadString();
+            rosters_.AddEntriesFrom(input, _repeated_rosters_codec);
             break;
           }
         }
       }
     }
-
-    #region Nested types
-    /// <summary>Container for nested types declared in the Player message type.</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static partial class Types {
-      public sealed partial class Attribute : pb::IMessage<Attribute> {
-        private static readonly pb::MessageParser<Attribute> _parser = new pb::MessageParser<Attribute>(() => new Attribute());
-        private pb::UnknownFieldSet _unknownFields;
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public static pb::MessageParser<Attribute> Parser { get { return _parser; } }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public static pbr::MessageDescriptor Descriptor {
-          get { return global::Messages.Player.Descriptor.NestedTypes[0]; }
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        pbr::MessageDescriptor pb::IMessage.Descriptor {
-          get { return Descriptor; }
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public Attribute() {
-          OnConstruction();
-        }
-
-        partial void OnConstruction();
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public Attribute(Attribute other) : this() {
-          name_ = other.name_;
-          value_ = other.value_;
-          _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public Attribute Clone() {
-          return new Attribute(this);
-        }
-
-        /// <summary>Field number for the "name" field.</summary>
-        public const int NameFieldNumber = 1;
-        private string name_ = "";
-        /// <summary>
-        /// Name should match a Filter.attribute field.
-        /// </summary>
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public string Name {
-          get { return name_; }
-          set {
-            name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-          }
-        }
-
-        /// <summary>Field number for the "value" field.</summary>
-        public const int ValueFieldNumber = 2;
-        private long value_;
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public long Value {
-          get { return value_; }
-          set {
-            value_ = value;
-          }
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public override bool Equals(object other) {
-          return Equals(other as Attribute);
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public bool Equals(Attribute other) {
-          if (ReferenceEquals(other, null)) {
-            return false;
-          }
-          if (ReferenceEquals(other, this)) {
-            return true;
-          }
-          if (Name != other.Name) return false;
-          if (Value != other.Value) return false;
-          return Equals(_unknownFields, other._unknownFields);
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public override int GetHashCode() {
-          int hash = 1;
-          if (Name.Length != 0) hash ^= Name.GetHashCode();
-          if (Value != 0L) hash ^= Value.GetHashCode();
-          if (_unknownFields != null) {
-            hash ^= _unknownFields.GetHashCode();
-          }
-          return hash;
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public override string ToString() {
-          return pb::JsonFormatter.ToDiagnosticString(this);
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void WriteTo(pb::CodedOutputStream output) {
-          if (Name.Length != 0) {
-            output.WriteRawTag(10);
-            output.WriteString(Name);
-          }
-          if (Value != 0L) {
-            output.WriteRawTag(16);
-            output.WriteInt64(Value);
-          }
-          if (_unknownFields != null) {
-            _unknownFields.WriteTo(output);
-          }
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public int CalculateSize() {
-          int size = 0;
-          if (Name.Length != 0) {
-            size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
-          }
-          if (Value != 0L) {
-            size += 1 + pb::CodedOutputStream.ComputeInt64Size(Value);
-          }
-          if (_unknownFields != null) {
-            size += _unknownFields.CalculateSize();
-          }
-          return size;
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void MergeFrom(Attribute other) {
-          if (other == null) {
-            return;
-          }
-          if (other.Name.Length != 0) {
-            Name = other.Name;
-          }
-          if (other.Value != 0L) {
-            Value = other.Value;
-          }
-          _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void MergeFrom(pb::CodedInputStream input) {
-          uint tag;
-          while ((tag = input.ReadTag()) != 0) {
-            switch(tag) {
-              default:
-                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-                break;
-              case 10: {
-                Name = input.ReadString();
-                break;
-              }
-              case 16: {
-                Value = input.ReadInt64();
-                break;
-              }
-            }
-          }
-        }
-
-      }
-
-    }
-    #endregion
 
   }
 
   /// <summary>
-  /// IlInput is an empty message reserved for future use.
+  /// A Match is used to represent a completed match object. It can be generated by
+  /// a MatchFunction as a proposal or can be returned by OpenMatch as a result in
+  /// response to the FetchMatches call.
+  /// When a match is returned by the FetchMatches call, it should contain at least 
+  /// one ticket to be considered as valid.
   /// </summary>
-  public sealed partial class IlInput : pb::IMessage<IlInput> {
-    private static readonly pb::MessageParser<IlInput> _parser = new pb::MessageParser<IlInput>(() => new IlInput());
+  public sealed partial class Match : pb::IMessage<Match> {
+    private static readonly pb::MessageParser<Match> _parser = new pb::MessageParser<Match>(() => new Match());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<IlInput> Parser { get { return _parser; } }
+    public static pb::MessageParser<Match> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Messages.MessagesReflection.Descriptor.MessageTypes[6]; }
+      get { return global::OpenMatch.MessagesReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1677,169 +1659,141 @@ namespace Messages {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public IlInput() {
+    public Match() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public IlInput(IlInput other) : this() {
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public IlInput Clone() {
-      return new IlInput(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as IlInput);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(IlInput other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(IlInput other) {
-      if (other == null) {
-        return;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class Assignments : pb::IMessage<Assignments> {
-    private static readonly pb::MessageParser<Assignments> _parser = new pb::MessageParser<Assignments>(() => new Assignments());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Assignments> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Messages.MessagesReflection.Descriptor.MessageTypes[7]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Assignments() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Assignments(Assignments other) : this() {
+    public Match(Match other) : this() {
+      matchId_ = other.matchId_;
+      matchProfile_ = other.matchProfile_;
+      matchFunction_ = other.matchFunction_;
+      tickets_ = other.tickets_.Clone();
       rosters_ = other.rosters_.Clone();
-      assignment_ = other.assignment_;
+      properties_ = other.properties_ != null ? other.properties_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Assignments Clone() {
-      return new Assignments(this);
+    public Match Clone() {
+      return new Match(this);
+    }
+
+    /// <summary>Field number for the "match_id" field.</summary>
+    public const int MatchIdFieldNumber = 1;
+    private string matchId_ = "";
+    /// <summary>
+    /// A Match ID that should be passed through the stack for tracing.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string MatchId {
+      get { return matchId_; }
+      set {
+        matchId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "match_profile" field.</summary>
+    public const int MatchProfileFieldNumber = 2;
+    private string matchProfile_ = "";
+    /// <summary>
+    /// Name of the match profile that generated this Match.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string MatchProfile {
+      get { return matchProfile_; }
+      set {
+        matchProfile_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "match_function" field.</summary>
+    public const int MatchFunctionFieldNumber = 3;
+    private string matchFunction_ = "";
+    /// <summary>
+    /// Name of the match function that generated this Match.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string MatchFunction {
+      get { return matchFunction_; }
+      set {
+        matchFunction_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "tickets" field.</summary>
+    public const int TicketsFieldNumber = 4;
+    private static readonly pb::FieldCodec<global::OpenMatch.Ticket> _repeated_tickets_codec
+        = pb::FieldCodec.ForMessage(34, global::OpenMatch.Ticket.Parser);
+    private readonly pbc::RepeatedField<global::OpenMatch.Ticket> tickets_ = new pbc::RepeatedField<global::OpenMatch.Ticket>();
+    /// <summary>
+    /// Tickets belonging to this match.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::OpenMatch.Ticket> Tickets {
+      get { return tickets_; }
     }
 
     /// <summary>Field number for the "rosters" field.</summary>
-    public const int RostersFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::Messages.Roster> _repeated_rosters_codec
-        = pb::FieldCodec.ForMessage(10, global::Messages.Roster.Parser);
-    private readonly pbc::RepeatedField<global::Messages.Roster> rosters_ = new pbc::RepeatedField<global::Messages.Roster>();
+    public const int RostersFieldNumber = 5;
+    private static readonly pb::FieldCodec<global::OpenMatch.Roster> _repeated_rosters_codec
+        = pb::FieldCodec.ForMessage(42, global::OpenMatch.Roster.Parser);
+    private readonly pbc::RepeatedField<global::OpenMatch.Roster> rosters_ = new pbc::RepeatedField<global::OpenMatch.Roster>();
+    /// <summary>
+    /// Set of Rosters that comprise this Match
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Messages.Roster> Rosters {
+    public pbc::RepeatedField<global::OpenMatch.Roster> Rosters {
       get { return rosters_; }
     }
 
-    /// <summary>Field number for the "assignment" field.</summary>
-    public const int AssignmentFieldNumber = 10;
-    private string assignment_ = "";
+    /// <summary>Field number for the "properties" field.</summary>
+    public const int PropertiesFieldNumber = 6;
+    private global::Google.Protobuf.WellKnownTypes.Struct properties_;
+    /// <summary>
+    /// Match properties for this Match. Open Match does not interpret this field.
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Assignment {
-      get { return assignment_; }
+    public global::Google.Protobuf.WellKnownTypes.Struct Properties {
+      get { return properties_; }
       set {
-        assignment_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        properties_ = value;
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as Assignments);
+      return Equals(other as Match);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Assignments other) {
+    public bool Equals(Match other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (MatchId != other.MatchId) return false;
+      if (MatchProfile != other.MatchProfile) return false;
+      if (MatchFunction != other.MatchFunction) return false;
+      if(!tickets_.Equals(other.tickets_)) return false;
       if(!rosters_.Equals(other.rosters_)) return false;
-      if (Assignment != other.Assignment) return false;
+      if (!object.Equals(Properties, other.Properties)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (MatchId.Length != 0) hash ^= MatchId.GetHashCode();
+      if (MatchProfile.Length != 0) hash ^= MatchProfile.GetHashCode();
+      if (MatchFunction.Length != 0) hash ^= MatchFunction.GetHashCode();
+      hash ^= tickets_.GetHashCode();
       hash ^= rosters_.GetHashCode();
-      if (Assignment.Length != 0) hash ^= Assignment.GetHashCode();
+      if (properties_ != null) hash ^= Properties.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1853,10 +1807,23 @@ namespace Messages {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (MatchId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(MatchId);
+      }
+      if (MatchProfile.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(MatchProfile);
+      }
+      if (MatchFunction.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(MatchFunction);
+      }
+      tickets_.WriteTo(output, _repeated_tickets_codec);
       rosters_.WriteTo(output, _repeated_rosters_codec);
-      if (Assignment.Length != 0) {
-        output.WriteRawTag(82);
-        output.WriteString(Assignment);
+      if (properties_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(Properties);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1866,9 +1833,19 @@ namespace Messages {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (MatchId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(MatchId);
+      }
+      if (MatchProfile.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(MatchProfile);
+      }
+      if (MatchFunction.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(MatchFunction);
+      }
+      size += tickets_.CalculateSize(_repeated_tickets_codec);
       size += rosters_.CalculateSize(_repeated_rosters_codec);
-      if (Assignment.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Assignment);
+      if (properties_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Properties);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1877,13 +1854,26 @@ namespace Messages {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Assignments other) {
+    public void MergeFrom(Match other) {
       if (other == null) {
         return;
       }
+      if (other.MatchId.Length != 0) {
+        MatchId = other.MatchId;
+      }
+      if (other.MatchProfile.Length != 0) {
+        MatchProfile = other.MatchProfile;
+      }
+      if (other.MatchFunction.Length != 0) {
+        MatchFunction = other.MatchFunction;
+      }
+      tickets_.Add(other.tickets_);
       rosters_.Add(other.rosters_);
-      if (other.Assignment.Length != 0) {
-        Assignment = other.Assignment;
+      if (other.properties_ != null) {
+        if (properties_ == null) {
+          Properties = new global::Google.Protobuf.WellKnownTypes.Struct();
+        }
+        Properties.MergeFrom(other.Properties);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1897,11 +1887,30 @@ namespace Messages {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
+            MatchId = input.ReadString();
+            break;
+          }
+          case 18: {
+            MatchProfile = input.ReadString();
+            break;
+          }
+          case 26: {
+            MatchFunction = input.ReadString();
+            break;
+          }
+          case 34: {
+            tickets_.AddEntriesFrom(input, _repeated_tickets_codec);
+            break;
+          }
+          case 42: {
             rosters_.AddEntriesFrom(input, _repeated_rosters_codec);
             break;
           }
-          case 82: {
-            Assignment = input.ReadString();
+          case 50: {
+            if (properties_ == null) {
+              Properties = new global::Google.Protobuf.WellKnownTypes.Struct();
+            }
+            input.ReadMessage(Properties);
             break;
           }
         }

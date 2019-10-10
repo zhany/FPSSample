@@ -3,14 +3,14 @@
 //     source: matchfunction.proto
 // </auto-generated>
 // Original file comments:
-// Copyright 2018 Google LLC
-// 
+// Copyright 2019 Google LLC
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,44 +22,44 @@
 
 using grpc = global::Grpc.Core;
 
-namespace Api {
+namespace OpenMatch {
   /// <summary>
-  /// The MMF proto defines the API for running MMFs as long-lived, 'serving'
-  /// functions inside of the kubernetes cluster.
+  /// This proto defines the API for running Match Functions as long-lived,
+  /// 'serving' functions.
   /// </summary>
   public static partial class MatchFunction
   {
-    static readonly string __ServiceName = "api.MatchFunction";
+    static readonly string __ServiceName = "openmatch.MatchFunction";
 
-    static readonly grpc::Marshaller<global::Api.RunRequest> __Marshaller_api_RunRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Api.RunRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Api.RunResponse> __Marshaller_api_RunResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Api.RunResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::OpenMatch.RunRequest> __Marshaller_openmatch_RunRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::OpenMatch.RunRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::OpenMatch.RunResponse> __Marshaller_openmatch_RunResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::OpenMatch.RunResponse.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::Api.RunRequest, global::Api.RunResponse> __Method_Run = new grpc::Method<global::Api.RunRequest, global::Api.RunResponse>(
-        grpc::MethodType.Unary,
+    static readonly grpc::Method<global::OpenMatch.RunRequest, global::OpenMatch.RunResponse> __Method_Run = new grpc::Method<global::OpenMatch.RunRequest, global::OpenMatch.RunResponse>(
+        grpc::MethodType.ServerStreaming,
         __ServiceName,
         "Run",
-        __Marshaller_api_RunRequest,
-        __Marshaller_api_RunResponse);
+        __Marshaller_openmatch_RunRequest,
+        __Marshaller_openmatch_RunResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::Api.MatchfunctionReflection.Descriptor.Services[0]; }
+      get { return global::OpenMatch.MatchfunctionReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of MatchFunction</summary>
+    [grpc::BindServiceMethod(typeof(MatchFunction), "BindService")]
     public abstract partial class MatchFunctionBase
     {
       /// <summary>
-      /// The assumption is that there will be one service for each MMF that is
-      /// being served.  Build your MMF in the appropriate serving harness, deploy it
-      /// to the K8s cluster with a unique service name, then connect to that service
-      /// and call 'Run()' to execute the fuction.
+      /// This is the function that is executed when by the Open Match backend to
+      /// generate Match proposals.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
+      /// <param name="responseStream">Used for sending responses back to the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
-      /// <returns>The response to send back to the client (wrapped by a task).</returns>
-      public virtual global::System.Threading.Tasks.Task<global::Api.RunResponse> Run(global::Api.RunRequest request, grpc::ServerCallContext context)
+      /// <returns>A task indicating completion of the handler.</returns>
+      public virtual global::System.Threading.Tasks.Task Run(global::OpenMatch.RunRequest request, grpc::IServerStreamWriter<global::OpenMatch.RunResponse> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -71,7 +71,7 @@ namespace Api {
     {
       /// <summary>Creates a new client for MatchFunction</summary>
       /// <param name="channel">The channel to use to make remote calls.</param>
-      public MatchFunctionClient(grpc::Channel channel) : base(channel)
+      public MatchFunctionClient(grpc::ChannelBase channel) : base(channel)
       {
       }
       /// <summary>Creates a new client for MatchFunction that uses a custom <c>CallInvoker</c>.</summary>
@@ -90,60 +90,28 @@ namespace Api {
       }
 
       /// <summary>
-      /// The assumption is that there will be one service for each MMF that is
-      /// being served.  Build your MMF in the appropriate serving harness, deploy it
-      /// to the K8s cluster with a unique service name, then connect to that service
-      /// and call 'Run()' to execute the fuction.
+      /// This is the function that is executed when by the Open Match backend to
+      /// generate Match proposals.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The response received from the server.</returns>
-      public virtual global::Api.RunResponse Run(global::Api.RunRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncServerStreamingCall<global::OpenMatch.RunResponse> Run(global::OpenMatch.RunRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Run(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// The assumption is that there will be one service for each MMF that is
-      /// being served.  Build your MMF in the appropriate serving harness, deploy it
-      /// to the K8s cluster with a unique service name, then connect to that service
-      /// and call 'Run()' to execute the fuction.
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The response received from the server.</returns>
-      public virtual global::Api.RunResponse Run(global::Api.RunRequest request, grpc::CallOptions options)
-      {
-        return CallInvoker.BlockingUnaryCall(__Method_Run, null, options, request);
-      }
-      /// <summary>
-      /// The assumption is that there will be one service for each MMF that is
-      /// being served.  Build your MMF in the appropriate serving harness, deploy it
-      /// to the K8s cluster with a unique service name, then connect to that service
-      /// and call 'Run()' to execute the fuction.
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Api.RunResponse> RunAsync(global::Api.RunRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return RunAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      /// <summary>
-      /// The assumption is that there will be one service for each MMF that is
-      /// being served.  Build your MMF in the appropriate serving harness, deploy it
-      /// to the K8s cluster with a unique service name, then connect to that service
-      /// and call 'Run()' to execute the fuction.
+      /// This is the function that is executed when by the Open Match backend to
+      /// generate Match proposals.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Api.RunResponse> RunAsync(global::Api.RunRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncServerStreamingCall<global::OpenMatch.RunResponse> Run(global::OpenMatch.RunRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_Run, null, options, request);
+        return CallInvoker.AsyncServerStreamingCall(__Method_Run, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override MatchFunctionClient NewInstance(ClientBaseConfiguration configuration)
@@ -160,13 +128,13 @@ namespace Api {
           .AddMethod(__Method_Run, serviceImpl.Run).Build();
     }
 
-    /// <summary>Register service method implementations with a service binder. Useful when customizing the service binding logic.
+    /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
     /// Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
     /// <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     public static void BindService(grpc::ServiceBinderBase serviceBinder, MatchFunctionBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_Run, serviceImpl.Run);
+      serviceBinder.AddMethod(__Method_Run, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::OpenMatch.RunRequest, global::OpenMatch.RunResponse>(serviceImpl.Run));
     }
 
   }

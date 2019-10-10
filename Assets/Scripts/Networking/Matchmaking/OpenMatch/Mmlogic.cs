@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Api {
+namespace OpenMatch {
 
   /// <summary>Holder for reflection information generated from mmlogic.proto</summary>
   public static partial class MmlogicReflection {
@@ -24,62 +24,35 @@ namespace Api {
     static MmlogicReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg1tbWxvZ2ljLnByb3RvEgNhcGkaDm1lc3NhZ2VzLnByb3RvGhxnb29nbGUv",
-            "YXBpL2Fubm90YXRpb25zLnByb3RvIjkKEUdldFByb2ZpbGVSZXF1ZXN0EiQK",
-            "BW1hdGNoGAEgASgLMhUubWVzc2FnZXMuTWF0Y2hPYmplY3QiOgoSR2V0UHJv",
-            "ZmlsZVJlc3BvbnNlEiQKBW1hdGNoGAEgASgLMhUubWVzc2FnZXMuTWF0Y2hP",
-            "YmplY3QiPQoVQ3JlYXRlUHJvcG9zYWxSZXF1ZXN0EiQKBW1hdGNoGAEgASgL",
-            "MhUubWVzc2FnZXMuTWF0Y2hPYmplY3QiGAoWQ3JlYXRlUHJvcG9zYWxSZXNw",
-            "b25zZSJBChRHZXRQbGF5ZXJQb29sUmVxdWVzdBIpCgtwbGF5ZXJfcG9vbBgB",
-            "IAEoCzIULm1lc3NhZ2VzLlBsYXllclBvb2wiQgoVR2V0UGxheWVyUG9vbFJl",
-            "c3BvbnNlEikKC3BsYXllcl9wb29sGAEgASgLMhQubWVzc2FnZXMuUGxheWVy",
-            "UG9vbCJHChtHZXRBbGxJZ25vcmVkUGxheWVyc1JlcXVlc3QSKAoNaWdub3Jl",
-            "X3BsYXllchgBIAEoCzIRLm1lc3NhZ2VzLklsSW5wdXQiQAocR2V0QWxsSWdu",
-            "b3JlZFBsYXllcnNSZXNwb25zZRIgCgZyb3N0ZXIYASABKAsyEC5tZXNzYWdl",
-            "cy5Sb3N0ZXIiRQoZTGlzdElnbm9yZWRQbGF5ZXJzUmVxdWVzdBIoCg1pZ25v",
-            "cmVfcGxheWVyGAEgASgLMhEubWVzc2FnZXMuSWxJbnB1dCI+ChpMaXN0SWdu",
-            "b3JlZFBsYXllcnNSZXNwb25zZRIgCgZyb3N0ZXIYASABKAsyEC5tZXNzYWdl",
-            "cy5Sb3N0ZXIymwQKB01tTG9naWMSagoKR2V0UHJvZmlsZRIWLmFwaS5HZXRQ",
-            "cm9maWxlUmVxdWVzdBoXLmFwaS5HZXRQcm9maWxlUmVzcG9uc2UiK4LT5JMC",
-            "JRIjL3YxL2xvZ2ljL21hdGNoLXByb2ZpbGVzL3ttYXRjaC5pZH0SbwoOQ3Jl",
-            "YXRlUHJvcG9zYWwSGi5hcGkuQ3JlYXRlUHJvcG9zYWxSZXF1ZXN0GhsuYXBp",
-            "LkNyZWF0ZVByb3Bvc2FsUmVzcG9uc2UiJILT5JMCHhoZL3YxL2xvZ2ljL21h",
-            "dGNoLXByb3Bvc2FsczoBKhJ7Cg1HZXRQbGF5ZXJQb29sEhkuYXBpLkdldFBs",
-            "YXllclBvb2xSZXF1ZXN0GhouYXBpLkdldFBsYXllclBvb2xSZXNwb25zZSIx",
-            "gtPkkwIrEikvdjEvbG9naWMvcGxheWVyLXBvb2xzL3twbGF5ZXJfcG9vbC5u",
-            "YW1lfTABEl0KFEdldEFsbElnbm9yZWRQbGF5ZXJzEiAuYXBpLkdldEFsbEln",
-            "bm9yZWRQbGF5ZXJzUmVxdWVzdBohLmFwaS5HZXRBbGxJZ25vcmVkUGxheWVy",
-            "c1Jlc3BvbnNlIgASVwoSTGlzdElnbm9yZWRQbGF5ZXJzEh4uYXBpLkxpc3RJ",
-            "Z25vcmVkUGxheWVyc1JlcXVlc3QaHy5hcGkuTGlzdElnbm9yZWRQbGF5ZXJz",
-            "UmVzcG9uc2UiAEINWgtpbnRlcm5hbC9wYmIGcHJvdG8z"));
+            "Cg1tbWxvZ2ljLnByb3RvEglvcGVubWF0Y2gaDm1lc3NhZ2VzLnByb3RvGhxn",
+            "b29nbGUvYXBpL2Fubm90YXRpb25zLnByb3RvIjQKE1F1ZXJ5VGlja2V0c1Jl",
+            "cXVlc3QSHQoEcG9vbBgBIAEoCzIPLm9wZW5tYXRjaC5Qb29sIjoKFFF1ZXJ5",
+            "VGlja2V0c1Jlc3BvbnNlEiIKB3RpY2tldHMYASADKAsyES5vcGVubWF0Y2gu",
+            "VGlja2V0MoIBCgdNbUxvZ2ljEncKDFF1ZXJ5VGlja2V0cxIeLm9wZW5tYXRj",
+            "aC5RdWVyeVRpY2tldHNSZXF1ZXN0Gh8ub3Blbm1hdGNoLlF1ZXJ5VGlja2V0",
+            "c1Jlc3BvbnNlIiSC0+STAh4iGS92MS9tbWxvZ2ljL3RpY2tldHM6cXVlcnk6",
+            "ASowAUIuWiBvcGVuLW1hdGNoLmRldi9vcGVuLW1hdGNoL3BrZy9wYqoCCU9w",
+            "ZW5NYXRjaGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Messages.MessagesReflection.Descriptor, global::Google.Api.AnnotationsReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::OpenMatch.MessagesReflection.Descriptor, global::Google.Api.AnnotationsReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Api.GetProfileRequest), global::Api.GetProfileRequest.Parser, new[]{ "Match" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Api.GetProfileResponse), global::Api.GetProfileResponse.Parser, new[]{ "Match" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Api.CreateProposalRequest), global::Api.CreateProposalRequest.Parser, new[]{ "Match" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Api.CreateProposalResponse), global::Api.CreateProposalResponse.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Api.GetPlayerPoolRequest), global::Api.GetPlayerPoolRequest.Parser, new[]{ "PlayerPool" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Api.GetPlayerPoolResponse), global::Api.GetPlayerPoolResponse.Parser, new[]{ "PlayerPool" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Api.GetAllIgnoredPlayersRequest), global::Api.GetAllIgnoredPlayersRequest.Parser, new[]{ "IgnorePlayer" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Api.GetAllIgnoredPlayersResponse), global::Api.GetAllIgnoredPlayersResponse.Parser, new[]{ "Roster" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Api.ListIgnoredPlayersRequest), global::Api.ListIgnoredPlayersRequest.Parser, new[]{ "IgnorePlayer" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Api.ListIgnoredPlayersResponse), global::Api.ListIgnoredPlayersResponse.Parser, new[]{ "Roster" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::OpenMatch.QueryTicketsRequest), global::OpenMatch.QueryTicketsRequest.Parser, new[]{ "Pool" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::OpenMatch.QueryTicketsResponse), global::OpenMatch.QueryTicketsResponse.Parser, new[]{ "Tickets" }, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class GetProfileRequest : pb::IMessage<GetProfileRequest> {
-    private static readonly pb::MessageParser<GetProfileRequest> _parser = new pb::MessageParser<GetProfileRequest>(() => new GetProfileRequest());
+  public sealed partial class QueryTicketsRequest : pb::IMessage<QueryTicketsRequest> {
+    private static readonly pb::MessageParser<QueryTicketsRequest> _parser = new pb::MessageParser<QueryTicketsRequest>(() => new QueryTicketsRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<GetProfileRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<QueryTicketsRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Api.MmlogicReflection.Descriptor.MessageTypes[0]; }
+      get { return global::OpenMatch.MmlogicReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -88,55 +61,58 @@ namespace Api {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetProfileRequest() {
+    public QueryTicketsRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetProfileRequest(GetProfileRequest other) : this() {
-      match_ = other.match_ != null ? other.match_.Clone() : null;
+    public QueryTicketsRequest(QueryTicketsRequest other) : this() {
+      pool_ = other.pool_ != null ? other.pool_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetProfileRequest Clone() {
-      return new GetProfileRequest(this);
+    public QueryTicketsRequest Clone() {
+      return new QueryTicketsRequest(this);
     }
 
-    /// <summary>Field number for the "match" field.</summary>
-    public const int MatchFieldNumber = 1;
-    private global::Messages.MatchObject match_;
+    /// <summary>Field number for the "pool" field.</summary>
+    public const int PoolFieldNumber = 1;
+    private global::OpenMatch.Pool pool_;
+    /// <summary>
+    /// The Pool representing the set of Filters to be queried.
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Messages.MatchObject Match {
-      get { return match_; }
+    public global::OpenMatch.Pool Pool {
+      get { return pool_; }
       set {
-        match_ = value;
+        pool_ = value;
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as GetProfileRequest);
+      return Equals(other as QueryTicketsRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GetProfileRequest other) {
+    public bool Equals(QueryTicketsRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(Match, other.Match)) return false;
+      if (!object.Equals(Pool, other.Pool)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (match_ != null) hash ^= Match.GetHashCode();
+      if (pool_ != null) hash ^= Pool.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -150,9 +126,9 @@ namespace Api {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (match_ != null) {
+      if (pool_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(Match);
+        output.WriteMessage(Pool);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -162,8 +138,8 @@ namespace Api {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (match_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Match);
+      if (pool_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Pool);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -172,15 +148,15 @@ namespace Api {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GetProfileRequest other) {
+    public void MergeFrom(QueryTicketsRequest other) {
       if (other == null) {
         return;
       }
-      if (other.match_ != null) {
-        if (match_ == null) {
-          match_ = new global::Messages.MatchObject();
+      if (other.pool_ != null) {
+        if (pool_ == null) {
+          Pool = new global::OpenMatch.Pool();
         }
-        Match.MergeFrom(other.Match);
+        Pool.MergeFrom(other.Pool);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -194,10 +170,10 @@ namespace Api {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (match_ == null) {
-              match_ = new global::Messages.MatchObject();
+            if (pool_ == null) {
+              Pool = new global::OpenMatch.Pool();
             }
-            input.ReadMessage(match_);
+            input.ReadMessage(Pool);
             break;
           }
         }
@@ -206,15 +182,15 @@ namespace Api {
 
   }
 
-  public sealed partial class GetProfileResponse : pb::IMessage<GetProfileResponse> {
-    private static readonly pb::MessageParser<GetProfileResponse> _parser = new pb::MessageParser<GetProfileResponse>(() => new GetProfileResponse());
+  public sealed partial class QueryTicketsResponse : pb::IMessage<QueryTicketsResponse> {
+    private static readonly pb::MessageParser<QueryTicketsResponse> _parser = new pb::MessageParser<QueryTicketsResponse>(() => new QueryTicketsResponse());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<GetProfileResponse> Parser { get { return _parser; } }
+    public static pb::MessageParser<QueryTicketsResponse> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Api.MmlogicReflection.Descriptor.MessageTypes[1]; }
+      get { return global::OpenMatch.MmlogicReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -223,55 +199,57 @@ namespace Api {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetProfileResponse() {
+    public QueryTicketsResponse() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetProfileResponse(GetProfileResponse other) : this() {
-      match_ = other.match_ != null ? other.match_.Clone() : null;
+    public QueryTicketsResponse(QueryTicketsResponse other) : this() {
+      tickets_ = other.tickets_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetProfileResponse Clone() {
-      return new GetProfileResponse(this);
+    public QueryTicketsResponse Clone() {
+      return new QueryTicketsResponse(this);
     }
 
-    /// <summary>Field number for the "match" field.</summary>
-    public const int MatchFieldNumber = 1;
-    private global::Messages.MatchObject match_;
+    /// <summary>Field number for the "tickets" field.</summary>
+    public const int TicketsFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::OpenMatch.Ticket> _repeated_tickets_codec
+        = pb::FieldCodec.ForMessage(10, global::OpenMatch.Ticket.Parser);
+    private readonly pbc::RepeatedField<global::OpenMatch.Ticket> tickets_ = new pbc::RepeatedField<global::OpenMatch.Ticket>();
+    /// <summary>
+    /// The Tickets that meet the Filter criteria requested by the Pool.
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Messages.MatchObject Match {
-      get { return match_; }
-      set {
-        match_ = value;
-      }
+    public pbc::RepeatedField<global::OpenMatch.Ticket> Tickets {
+      get { return tickets_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as GetProfileResponse);
+      return Equals(other as QueryTicketsResponse);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GetProfileResponse other) {
+    public bool Equals(QueryTicketsResponse other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(Match, other.Match)) return false;
+      if(!tickets_.Equals(other.tickets_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (match_ != null) hash ^= Match.GetHashCode();
+      hash ^= tickets_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -285,10 +263,7 @@ namespace Api {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (match_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Match);
-      }
+      tickets_.WriteTo(output, _repeated_tickets_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -297,9 +272,7 @@ namespace Api {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (match_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Match);
-      }
+      size += tickets_.CalculateSize(_repeated_tickets_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -307,16 +280,11 @@ namespace Api {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GetProfileResponse other) {
+    public void MergeFrom(QueryTicketsResponse other) {
       if (other == null) {
         return;
       }
-      if (other.match_ != null) {
-        if (match_ == null) {
-          match_ = new global::Messages.MatchObject();
-        }
-        Match.MergeFrom(other.Match);
-      }
+      tickets_.Add(other.tickets_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -329,1056 +297,7 @@ namespace Api {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (match_ == null) {
-              match_ = new global::Messages.MatchObject();
-            }
-            input.ReadMessage(match_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class CreateProposalRequest : pb::IMessage<CreateProposalRequest> {
-    private static readonly pb::MessageParser<CreateProposalRequest> _parser = new pb::MessageParser<CreateProposalRequest>(() => new CreateProposalRequest());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<CreateProposalRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Api.MmlogicReflection.Descriptor.MessageTypes[2]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public CreateProposalRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public CreateProposalRequest(CreateProposalRequest other) : this() {
-      match_ = other.match_ != null ? other.match_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public CreateProposalRequest Clone() {
-      return new CreateProposalRequest(this);
-    }
-
-    /// <summary>Field number for the "match" field.</summary>
-    public const int MatchFieldNumber = 1;
-    private global::Messages.MatchObject match_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Messages.MatchObject Match {
-      get { return match_; }
-      set {
-        match_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as CreateProposalRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(CreateProposalRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(Match, other.Match)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (match_ != null) hash ^= Match.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (match_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Match);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (match_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Match);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(CreateProposalRequest other) {
-      if (other == null) {
-        return;
-      }
-      if (other.match_ != null) {
-        if (match_ == null) {
-          match_ = new global::Messages.MatchObject();
-        }
-        Match.MergeFrom(other.Match);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (match_ == null) {
-              match_ = new global::Messages.MatchObject();
-            }
-            input.ReadMessage(match_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class CreateProposalResponse : pb::IMessage<CreateProposalResponse> {
-    private static readonly pb::MessageParser<CreateProposalResponse> _parser = new pb::MessageParser<CreateProposalResponse>(() => new CreateProposalResponse());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<CreateProposalResponse> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Api.MmlogicReflection.Descriptor.MessageTypes[3]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public CreateProposalResponse() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public CreateProposalResponse(CreateProposalResponse other) : this() {
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public CreateProposalResponse Clone() {
-      return new CreateProposalResponse(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as CreateProposalResponse);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(CreateProposalResponse other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(CreateProposalResponse other) {
-      if (other == null) {
-        return;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class GetPlayerPoolRequest : pb::IMessage<GetPlayerPoolRequest> {
-    private static readonly pb::MessageParser<GetPlayerPoolRequest> _parser = new pb::MessageParser<GetPlayerPoolRequest>(() => new GetPlayerPoolRequest());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<GetPlayerPoolRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Api.MmlogicReflection.Descriptor.MessageTypes[4]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetPlayerPoolRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetPlayerPoolRequest(GetPlayerPoolRequest other) : this() {
-      playerPool_ = other.playerPool_ != null ? other.playerPool_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetPlayerPoolRequest Clone() {
-      return new GetPlayerPoolRequest(this);
-    }
-
-    /// <summary>Field number for the "player_pool" field.</summary>
-    public const int PlayerPoolFieldNumber = 1;
-    private global::Messages.PlayerPool playerPool_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Messages.PlayerPool PlayerPool {
-      get { return playerPool_; }
-      set {
-        playerPool_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as GetPlayerPoolRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GetPlayerPoolRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(PlayerPool, other.PlayerPool)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (playerPool_ != null) hash ^= PlayerPool.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (playerPool_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(PlayerPool);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (playerPool_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerPool);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GetPlayerPoolRequest other) {
-      if (other == null) {
-        return;
-      }
-      if (other.playerPool_ != null) {
-        if (playerPool_ == null) {
-          playerPool_ = new global::Messages.PlayerPool();
-        }
-        PlayerPool.MergeFrom(other.PlayerPool);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (playerPool_ == null) {
-              playerPool_ = new global::Messages.PlayerPool();
-            }
-            input.ReadMessage(playerPool_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class GetPlayerPoolResponse : pb::IMessage<GetPlayerPoolResponse> {
-    private static readonly pb::MessageParser<GetPlayerPoolResponse> _parser = new pb::MessageParser<GetPlayerPoolResponse>(() => new GetPlayerPoolResponse());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<GetPlayerPoolResponse> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Api.MmlogicReflection.Descriptor.MessageTypes[5]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetPlayerPoolResponse() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetPlayerPoolResponse(GetPlayerPoolResponse other) : this() {
-      playerPool_ = other.playerPool_ != null ? other.playerPool_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetPlayerPoolResponse Clone() {
-      return new GetPlayerPoolResponse(this);
-    }
-
-    /// <summary>Field number for the "player_pool" field.</summary>
-    public const int PlayerPoolFieldNumber = 1;
-    private global::Messages.PlayerPool playerPool_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Messages.PlayerPool PlayerPool {
-      get { return playerPool_; }
-      set {
-        playerPool_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as GetPlayerPoolResponse);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GetPlayerPoolResponse other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(PlayerPool, other.PlayerPool)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (playerPool_ != null) hash ^= PlayerPool.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (playerPool_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(PlayerPool);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (playerPool_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerPool);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GetPlayerPoolResponse other) {
-      if (other == null) {
-        return;
-      }
-      if (other.playerPool_ != null) {
-        if (playerPool_ == null) {
-          playerPool_ = new global::Messages.PlayerPool();
-        }
-        PlayerPool.MergeFrom(other.PlayerPool);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (playerPool_ == null) {
-              playerPool_ = new global::Messages.PlayerPool();
-            }
-            input.ReadMessage(playerPool_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class GetAllIgnoredPlayersRequest : pb::IMessage<GetAllIgnoredPlayersRequest> {
-    private static readonly pb::MessageParser<GetAllIgnoredPlayersRequest> _parser = new pb::MessageParser<GetAllIgnoredPlayersRequest>(() => new GetAllIgnoredPlayersRequest());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<GetAllIgnoredPlayersRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Api.MmlogicReflection.Descriptor.MessageTypes[6]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetAllIgnoredPlayersRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetAllIgnoredPlayersRequest(GetAllIgnoredPlayersRequest other) : this() {
-      ignorePlayer_ = other.ignorePlayer_ != null ? other.ignorePlayer_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetAllIgnoredPlayersRequest Clone() {
-      return new GetAllIgnoredPlayersRequest(this);
-    }
-
-    /// <summary>Field number for the "ignore_player" field.</summary>
-    public const int IgnorePlayerFieldNumber = 1;
-    private global::Messages.IlInput ignorePlayer_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Messages.IlInput IgnorePlayer {
-      get { return ignorePlayer_; }
-      set {
-        ignorePlayer_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as GetAllIgnoredPlayersRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GetAllIgnoredPlayersRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(IgnorePlayer, other.IgnorePlayer)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (ignorePlayer_ != null) hash ^= IgnorePlayer.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (ignorePlayer_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(IgnorePlayer);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (ignorePlayer_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(IgnorePlayer);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GetAllIgnoredPlayersRequest other) {
-      if (other == null) {
-        return;
-      }
-      if (other.ignorePlayer_ != null) {
-        if (ignorePlayer_ == null) {
-          ignorePlayer_ = new global::Messages.IlInput();
-        }
-        IgnorePlayer.MergeFrom(other.IgnorePlayer);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (ignorePlayer_ == null) {
-              ignorePlayer_ = new global::Messages.IlInput();
-            }
-            input.ReadMessage(ignorePlayer_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class GetAllIgnoredPlayersResponse : pb::IMessage<GetAllIgnoredPlayersResponse> {
-    private static readonly pb::MessageParser<GetAllIgnoredPlayersResponse> _parser = new pb::MessageParser<GetAllIgnoredPlayersResponse>(() => new GetAllIgnoredPlayersResponse());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<GetAllIgnoredPlayersResponse> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Api.MmlogicReflection.Descriptor.MessageTypes[7]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetAllIgnoredPlayersResponse() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetAllIgnoredPlayersResponse(GetAllIgnoredPlayersResponse other) : this() {
-      roster_ = other.roster_ != null ? other.roster_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetAllIgnoredPlayersResponse Clone() {
-      return new GetAllIgnoredPlayersResponse(this);
-    }
-
-    /// <summary>Field number for the "roster" field.</summary>
-    public const int RosterFieldNumber = 1;
-    private global::Messages.Roster roster_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Messages.Roster Roster {
-      get { return roster_; }
-      set {
-        roster_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as GetAllIgnoredPlayersResponse);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GetAllIgnoredPlayersResponse other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(Roster, other.Roster)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (roster_ != null) hash ^= Roster.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (roster_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Roster);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (roster_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Roster);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GetAllIgnoredPlayersResponse other) {
-      if (other == null) {
-        return;
-      }
-      if (other.roster_ != null) {
-        if (roster_ == null) {
-          roster_ = new global::Messages.Roster();
-        }
-        Roster.MergeFrom(other.Roster);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (roster_ == null) {
-              roster_ = new global::Messages.Roster();
-            }
-            input.ReadMessage(roster_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class ListIgnoredPlayersRequest : pb::IMessage<ListIgnoredPlayersRequest> {
-    private static readonly pb::MessageParser<ListIgnoredPlayersRequest> _parser = new pb::MessageParser<ListIgnoredPlayersRequest>(() => new ListIgnoredPlayersRequest());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ListIgnoredPlayersRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Api.MmlogicReflection.Descriptor.MessageTypes[8]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ListIgnoredPlayersRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ListIgnoredPlayersRequest(ListIgnoredPlayersRequest other) : this() {
-      ignorePlayer_ = other.ignorePlayer_ != null ? other.ignorePlayer_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ListIgnoredPlayersRequest Clone() {
-      return new ListIgnoredPlayersRequest(this);
-    }
-
-    /// <summary>Field number for the "ignore_player" field.</summary>
-    public const int IgnorePlayerFieldNumber = 1;
-    private global::Messages.IlInput ignorePlayer_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Messages.IlInput IgnorePlayer {
-      get { return ignorePlayer_; }
-      set {
-        ignorePlayer_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as ListIgnoredPlayersRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ListIgnoredPlayersRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(IgnorePlayer, other.IgnorePlayer)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (ignorePlayer_ != null) hash ^= IgnorePlayer.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (ignorePlayer_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(IgnorePlayer);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (ignorePlayer_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(IgnorePlayer);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ListIgnoredPlayersRequest other) {
-      if (other == null) {
-        return;
-      }
-      if (other.ignorePlayer_ != null) {
-        if (ignorePlayer_ == null) {
-          ignorePlayer_ = new global::Messages.IlInput();
-        }
-        IgnorePlayer.MergeFrom(other.IgnorePlayer);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (ignorePlayer_ == null) {
-              ignorePlayer_ = new global::Messages.IlInput();
-            }
-            input.ReadMessage(ignorePlayer_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class ListIgnoredPlayersResponse : pb::IMessage<ListIgnoredPlayersResponse> {
-    private static readonly pb::MessageParser<ListIgnoredPlayersResponse> _parser = new pb::MessageParser<ListIgnoredPlayersResponse>(() => new ListIgnoredPlayersResponse());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ListIgnoredPlayersResponse> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Api.MmlogicReflection.Descriptor.MessageTypes[9]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ListIgnoredPlayersResponse() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ListIgnoredPlayersResponse(ListIgnoredPlayersResponse other) : this() {
-      roster_ = other.roster_ != null ? other.roster_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ListIgnoredPlayersResponse Clone() {
-      return new ListIgnoredPlayersResponse(this);
-    }
-
-    /// <summary>Field number for the "roster" field.</summary>
-    public const int RosterFieldNumber = 1;
-    private global::Messages.Roster roster_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Messages.Roster Roster {
-      get { return roster_; }
-      set {
-        roster_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as ListIgnoredPlayersResponse);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ListIgnoredPlayersResponse other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(Roster, other.Roster)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (roster_ != null) hash ^= Roster.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (roster_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Roster);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (roster_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Roster);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ListIgnoredPlayersResponse other) {
-      if (other == null) {
-        return;
-      }
-      if (other.roster_ != null) {
-        if (roster_ == null) {
-          roster_ = new global::Messages.Roster();
-        }
-        Roster.MergeFrom(other.Roster);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (roster_ == null) {
-              roster_ = new global::Messages.Roster();
-            }
-            input.ReadMessage(roster_);
+            tickets_.AddEntriesFrom(input, _repeated_tickets_codec);
             break;
           }
         }
