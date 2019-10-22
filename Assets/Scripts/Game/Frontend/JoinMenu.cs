@@ -104,6 +104,7 @@ public class JoinMenu : MonoBehaviour
 
     public void OnFindMatch()
     {
+        Console.EnqueueCommandNoHistory("startmatchmake");
         Console.EnqueueCommandNoHistory("matchmake");
     }
 

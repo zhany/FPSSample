@@ -1,9 +1,11 @@
 using System;
 using System.Net;
+using System.Text;
+using OpenMatch;
 
 namespace UnityEngine.Ucg.Matchmaking
 {
-    public class Matchmaker 
+    public class Matchmaker
     {
         /// <summary>
         /// The hostname[:port]/{projectid} of your matchmaking server
@@ -12,6 +14,7 @@ namespace UnityEngine.Ucg.Matchmaking
 
         MatchmakingController matchmakingController;
         private MatchmakingRequest request;
+        private Ticket ticket;
 
         public delegate void SuccessCallback(Assignment assignment);
         public delegate void ErrorCallback(string error);
@@ -54,13 +57,29 @@ namespace UnityEngine.Ucg.Matchmaking
         /// <param name="groupProps">Custom group properties relevant to the matchmaking function</param>
         public void RequestMatch(string playerId, MatchmakingPlayerProperties playerProps, MatchmakingGroupProperties groupProps)
         {
-            request = CreateMatchmakingRequest(playerId, playerProps, groupProps);
+            ticket = TicketUtil.GenerateTicket(RandomString(6, true));
+            //request = CreateMatchmakingRequest(playerId, playerProps, groupProps);
 
             matchmakingController = new MatchmakingController(Endpoint);
 
-            matchmakingController.StartRequestMatch(request, GetAssignment, OnError);
+            matchmakingController.StartRequestMatch(ticket, GetAssignment, OnError);
             State = MatchmakingState.Requesting;
             Debug.Log(State);
+        }
+
+        public static string RandomString(int size, bool lowerCase)
+        {
+            StringBuilder builder = new StringBuilder();
+            System.Random random = new System.Random();
+            char ch;
+            for (int i = 0; i < size; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+            if (lowerCase)
+                return builder.ToString().ToLower();
+            return builder.ToString();
         }
 
         /// <summary>
@@ -118,7 +137,7 @@ namespace UnityEngine.Ucg.Matchmaking
 
         void GetAssignment()
         {
-            matchmakingController.StartGetAssignment(request.Players[0].Id, OnSuccess, OnError);
+            matchmakingController.StartGetAssignment(ticket, OnSuccess, OnError);
             State = MatchmakingState.Searching;
             Debug.Log(State);
         }
